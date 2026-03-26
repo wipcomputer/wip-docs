@@ -1,20 +1,20 @@
 ---
 title: "xAI Grok"
-description: "xAI Grok API. Search the web, search X, generate images, generate video. All from one module."
+description: "xAI Grok API. Search the web, search X, generate images, generate video. All from one tool."
 ---
 
-# wip-xai-grok
+# xAI Grok
 
-xAI Grok API. Search the web, search X, generate images, generate video. All from one module.
+Search the web, search X, generate images, generate video. All from one tool.
 
 **Sensor:** search_web, search_x ... turns questions into knowledge.
 **Actuator:** generate_image, edit_image, generate_video ... turns prompts into media.
 
-Zero dependencies. Four interfaces: CLI, Module, MCP Server, Skill.
+Zero dependencies. Four interfaces: CLI, Module, Connection Point, Skill.
 
 ## Install
 
-Open your AI coding tool and say:
+Open your AI and say:
 
 ```
 Clone wipcomputer/wip-xai-grok and read the README and SKILL.md.
@@ -26,7 +26,7 @@ Then explain to me:
 Then ask me if I have more questions, or if I want you to integrate it into our system.
 ```
 
-Your agent will read the repo, explain the tool, and walk you through integration interactively.
+Your AI will read the repo, explain the tool, and walk you through integration interactively.
 
 ### API Key
 
@@ -84,7 +84,7 @@ const result = await wait_for_video({ request_id: vid.request_id });
 console.log(result.url);
 ```
 
-### MCP Server
+### Connection Point
 
 Add to your `.mcp.json`:
 
@@ -125,4 +125,3 @@ Search functions ported from [castanley/grok v1.0.3](https://clawhub.ai/castanle
 ## License
 
 MIT
-

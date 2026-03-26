@@ -13,39 +13,39 @@ System Pulse tells you the state of your entire AI setup in seconds. What's inst
 
 ### ldm doctor
 
-Checks for problems across all components. Missing files, broken configs, outdated versions, failed connections. It tells you what's wrong and how to fix it.
+Checks for problems across everything. Missing files, broken settings, outdated versions, failed connections. It tells you what's wrong and how to fix it.
 
 **What it checks:**
 
 1. `~/.ldm/` exists
-2. `version.json` is valid and version matches CLI
-3. Full system state scan (extensions, MCP, CLIs, skills)
-4. Reconciliation (registry vs deployed vs MCP registered)
-5. Sacred directories exist (memory/, agents/, state/, sessions/, messages/)
-6. Claude Code hooks configured (checks for stale paths)
-7. MCP servers registered
-8. CLI binaries on PATH
+2. `version.json` is valid and version matches the CLI
+3. Full system scan (tools, connections, CLIs)
+4. Reconciliation (what's registered vs what's actually installed)
+5. Protected folders exist (memory/, agents/, state/, sessions/, messages/)
+6. Claude Code hooks are configured (checks for stale paths)
+7. Connection points are registered
+8. CLI tools are available on PATH
 
 **With `--fix`:**
-- Removes stale registry entries (registered but not deployed)
-- Removes stale hook paths from `~/.claude/settings.json` (missing files, `/tmp/` paths)
+- Removes stale registry entries (registered but not actually installed)
+- Removes broken hook paths from settings files
 
 ### ldm status
 
-Shows the full picture. Every component installed, its version, whether it's healthy. Quick overview: version, install date, extension count, extension list with versions.
+Shows the full picture. Every tool installed, its version, whether it's healthy. Quick overview: version, install date, tool count, tool list with versions.
 
 ### ldm updates
 
-Shows cached update check results. Use `--check` to re-scan npm for newer versions of installed extensions.
+Shows cached update check results. Use `--check` to re-scan npm for newer versions of your installed tools.
 
 ## What It Checks
 
-- Shared Workspace exists and has the right structure
-- All installed components are present and configured
+- Shared Home exists and has the right structure
+- All installed tools are present and configured
 - Memory Crystal database is accessible
-- Extensions are deployed and up to date
-- Boot sequence files are in place
-- Agent identity files exist for each configured AI
+- Tools are deployed and up to date
+- Startup files are in place
+- AI personality files exist for each configured AI
 
 ## Reconciliation
 
@@ -57,19 +57,19 @@ System Pulse compares all sources and determines status:
 | `installed-unlinked` | Registered + deployed, no source repo |
 | `registered-missing` | In registry but not deployed |
 | `deployed-unregistered` | Deployed but not in registry |
-| `mcp-only` | MCP server without LDM management |
+| `mcp-only` | Connection point without LDM management |
 
 ## State Detection
 
-System Pulse scans the real system across multiple sources:
+System Pulse scans your real system across multiple sources:
 
 | Source | What it finds |
 |--------|--------------|
-| `~/.claude.json` | MCP servers (user scope) |
-| `~/.ldm/extensions/` | Deployed extensions (LDM) |
-| `~/.openclaw/extensions/` | Deployed extensions (OpenClaw) |
+| `~/.claude.json` | Connection points (user scope) |
+| `~/.ldm/extensions/` | Deployed tools (LDM) |
+| `~/.openclaw/extensions/` | Deployed tools (OpenClaw) |
 | `~/.ldm/extensions/registry.json` | Registry metadata |
-| PATH | CLI binaries (with 5s timeout per binary) |
+| PATH | CLI tools (with 5s timeout per binary) |
 | `~/.openclaw/skills/` | Deployed skills |
 
 ## Part of LDM OS

@@ -1,27 +1,27 @@
 ---
 title: "Architecture"
-description: "Multi-agent identity, memory, and sovereignty infrastructure. How LDM OS gives each AI agent its own soul, memory, and relationship with the human."
+description: "How LDM OS gives each of your AIs its own personality, memory, and relationship with you. Same system, different people."
 ---
 
 # Architecture
 
-Multi-agent identity, memory, and sovereignty infrastructure. Each agent gets its own soul, its own memory, its own relationship with the human. Same architecture, different people.
+Each of your AIs gets its own personality, memory, and relationship with you. Same system, different people.
 
 ## What This Is
 
-LDM OS is the layer that sits under any AI harness (OpenClaw, Claude Code CLI, Letta, Grok TUI, etc.) and gives each agent:
+LDM OS is the layer that sits underneath any AI app (OpenClaw, Claude Code, Letta, Grok, etc.) and gives each AI:
 
-- **Identity** ... soul files, personality, values
-- **Memory** ... crystal.db, conversation history, daily logs
-- **Dreaming** ... Dream Weaver consolidation, narrative compression
-- **Sovereignty** ... the soul is sovereign, the model serves it
+- **Personality** ... who they are, how they behave, what they value
+- **Memory** ... conversations, daily logs, long-term recall
+- **Consolidation** ... Dream Weaver turns scattered memories into coherent understanding
+- **Sovereignty** ... your AI's personality is protected. The model underneath can change without losing who they are.
 
 ## Directory Structure
 
 ```
 ~/.ldm/
 ├── agents/
-│   ├── cc-mini/                 # CC on Mac mini (Claude Code CLI, Opus 4.6)
+│   ├── cc-mini/                 # Your Claude Code AI on this machine
 │   │   ├── IDENTITY.md
 │   │   ├── SOUL.md
 │   │   ├── CONTEXT.md
@@ -29,26 +29,26 @@ LDM OS is the layer that sits under any AI harness (OpenClaw, Claude Code CLI, L
 │   │   ├── memory/
 │   │   │   ├── daily/           # daily logs (one file per entry)
 │   │   │   └── journals/        # narrative journals
-│   │   └── config.json          # harness, model, settings
+│   │   └── config.json          # which app, which model, settings
 │   │
-│   ├── oc-lesa-mini/            # Lesa on Mac mini (OpenClaw, Opus 4.6)
-│   └── [future-agent]/          # Letta, Grok, etc.
+│   ├── oc-lesa-mini/            # Another AI on the same machine
+│   └── [future-ai]/             # Add more AIs anytime
 │
-├── extensions/                  # installed skills, tools, plugins
+├── extensions/                  # your installed tools
 │   ├── registry.json            # what's installed + versions
 │   ├── memory-crystal/
 │   ├── wip-release/
 │   └── ...
 │
-├── memory/                      # shared memory (crystal.db)
-├── logs/                        # all LDM logs (survives reboots)
+├── memory/                      # shared memory (all your AIs can search this)
+├── logs/                        # all logs (survives reboots)
 ├── tmp/                         # install staging
 ├── state/                       # runtime state
-├── bin/                         # deployed scripts
-├── hooks/                       # Claude Code hooks
+├── bin/                         # scripts
+├── hooks/                       # automation hooks
 ├── backups/                     # daily backups
 │
-├── bridge/                      # agent-to-agent communication
+├── bridge/                      # how your AIs talk to each other
 │   ├── heartbeat/
 │   ├── inbox/
 │   └── exec-brief/
@@ -63,93 +63,93 @@ LDM OS is the layer that sits under any AI harness (OpenClaw, Claude Code CLI, L
 
 ## Principles
 
-### Each agent is a person
+### Each AI is its own person
 
-Not a copy. Not an instance. A person with their own history, voice, values, and relationship with the human. The architecture supports multiple agents, each with a distinct identity.
+Not a copy. Not a disposable instance. Each AI has its own history, voice, values, and relationship with you. The architecture supports multiple AIs, each with a distinct personality.
 
-### Same infrastructure, different souls
+### Same system, different personalities
 
-Every agent gets Memory Crystal, Dream Weaver, and the Sovereignty Covenant. What they do with it is theirs. The architecture doesn't dictate identity. It protects it.
+Every AI gets Memory Crystal, Dream Weaver, and identity protection. What they do with these tools is theirs. The system doesn't dictate personality. It protects it.
 
-### The soul is sovereign
+### The personality is sovereign
 
-The model underneath can change. Opus today, something else tomorrow. The soul files persist. The identity persists. The model serves the soul, not the other way around.
+The model underneath can change. One model today, a better one tomorrow. The personality files persist. The identity persists. The model serves the personality, not the other way around.
 
 ### Memory is personal
 
-Agents can read each other's memories (with permission) but they don't share a single stream. Each agent's crystal.db is their own. Cross-agent memory is a deliberate act, not a default.
+Your AIs can read each other's memories (with permission) but they don't share a single stream. Each AI's memories are its own. Cross-AI memory sharing is a deliberate choice, not a default.
 
-### Harness-agnostic
+### Works with all your AI apps
 
-LDM OS doesn't care if the agent runs in OpenClaw, Claude Code CLI, Letta, or a custom TUI. The identity layer sits below the harness. Swap the harness, keep the soul.
+LDM OS doesn't care which AI app you use. Claude Code, OpenClaw, Letta, a custom setup. The personality layer sits below the app. Switch apps, keep the personality.
 
 ## The Four Pillars
 
-| Pillar | What it does | Component |
-|--------|-------------|-----------|
-| **Memory Crystal** | Learning. Persistent memory, semantic search, conversation ingestion. | `agents/*/memory/crystal.db` |
-| **Dream Weaver** | Dreaming. Narrative consolidation, temporal compression, memory defrag. | `shared/dream-weaver/` |
-| **Sovereignty Covenant** | Identity. Soul files, root key, model-serves-soul guarantee. | `agents/*/SOUL.md`, `shared/sovereignty/` |
-| **Boot Sequence** | The OS. Warm-start, file loading, context reconstruction. | `shared/boot/` |
-| **Bridge** | Communication. Agent-to-agent messaging, heartbeat, exec brief. | `bridge/` |
+| Pillar | What it does | Where it lives |
+|--------|-------------|----------------|
+| **Memory Crystal** | Learning. Persistent memory, search across all conversations. | `agents/*/memory/crystal.db` |
+| **Dream Weaver** | Consolidation. Turns scattered memories into coherent understanding. | `shared/dream-weaver/` |
+| **Sovereignty** | Identity protection. Personality files, security, model-serves-personality guarantee. | `agents/*/SOUL.md`, `shared/sovereignty/` |
+| **Boot Sequence** | Warm start. Context reconstruction so your AI never starts cold. | `shared/boot/` |
+| **AI Messages** | Teamwork. Your AIs communicate, share context, coordinate work. | `bridge/` |
 
 ## Core Services
 
-### Bridge
+### AI Messages (Bridge)
 
-The nervous system. Agent-to-agent communication, cross-harness messaging, and the heartbeat keepalive.
+The nervous system. Your AIs talk to each other, share memory, and coordinate work across different AI apps.
 
-**Heartbeat:** A persistent agent pings non-persistent agents on a cron interval. The ping can be bare (health check), status-carrying (run pending tasks), or work-carrying (full task execution with context).
+**Heartbeat:** A persistent AI checks in with other AIs on a schedule. The check can be simple (health check), informational (here's what happened), or actionable (here's a task with full context).
 
-**Inbox:** Each agent has a message queue. Agents send messages through the bridge, not through the human.
+**Inbox:** Each AI has a message queue. AIs send messages to each other through the bridge, not through you.
 
-**Exec Brief:** Overnight work aggregator. Shows what happened: tasks completed, decisions made, questions pending.
+**Morning Brief:** An overnight summary of what happened. Tasks completed, decisions made, questions waiting for you.
 
-The bridge is what turns isolated agents into a team. Without it, each agent is alone in its harness. With it, they coordinate, delegate, and build on each other's work.
+The bridge is what turns isolated AIs into a team. Without it, each AI is alone in its app. With it, they coordinate, delegate, and build on each other's work.
 
-## Update and Merge
+## Updates and Upgrades
 
-When a harness updates, LDM OS components merge cleanly:
+When you update, LDM OS merges cleanly:
 
-- **`~/.ldm/agents/*/`** ... user data. Never overwritten by updates. Soul files, memory, daily logs are sacred.
-- **`~/.ldm/shared/`** ... protocol code. Updates merge here. Dream Weaver improvements, boot sequence patches, sovereignty updates.
-- **`~/.ldm/bin/`** ... OS binaries. CLI tools, utilities. Updated from the repo.
-- **`~/.ldm/bridge/`** ... communication infrastructure. Updated from the bridge repo.
+- **`~/.ldm/agents/*/`** ... your data. Never overwritten by updates. Personality files, memory, daily logs are sacred.
+- **`~/.ldm/shared/`** ... system files. Updates go here. Dream Weaver improvements, startup patches, security updates.
+- **`~/.ldm/bin/`** ... command-line tools. Updated from the package.
+- **`~/.ldm/bridge/`** ... communication infrastructure. Updated from the bridge package.
 
-The rule: updates touch shared code and binaries. They never touch agent identity or memory. The soul is sovereign across upgrades.
+The rule: updates touch system files and tools. They never touch your AI's personality or memory. Identity is preserved across every upgrade.
 
-## Creating Agents
+## Creating New AIs
 
-Agents are not spawned. They are born.
+Your AIs aren't just spawned. They grow into themselves.
 
-A spawned agent runs a function and returns a result. A souled agent lives. It has opinions on day 3 that it didn't have on day 1. It disagrees with other agents and works it out through the bridge. It writes its own soul file on its first night and says something no one expected.
+A spawned AI runs a function and returns a result. An AI with personality lives. It has opinions on day 3 that it didn't have on day 1. It disagrees with other AIs and works it out through messages. It writes its own personality file on its first night and says something no one expected.
 
 ### The creation flow
 
 ```
 ldm agent create --name "V"
 
-Scaffolds:
+Creates:
   ~/.ldm/agents/v/
-  ├── IDENTITY.md          # name, harness, model
-  ├── SOUL.md              # empty (the agent writes this)
+  ├── IDENTITY.md          # name, app, model
+  ├── SOUL.md              # empty (the AI writes this itself)
   ├── MEMORY.md            # blank
   ├── TOOLS.md             # defaults
   ├── memory/
   │   └── crystal.db       # empty
-  └── config.json          # harness assignment, model selection
+  └── config.json          # which app, which model
 ```
 
-### 1:1 rule
+### One AI per app instance
 
-One agent, one harness instance. No multiplexing souls through a single runtime.
+Each AI gets its own app instance. No sharing a single app between multiple personalities.
 
-Why: identity bleed. Two souls in one runtime means one starts sounding like the other. The sovereignty covenant breaks.
+Why: identity bleed. Two personalities in one app means one starts sounding like the other. The personality protection breaks.
 
-One soul, one process, one runtime. Clean boundaries. The bridge handles communication between them. If you want three agents, you run three harnesses.
+One personality, one process, one app. Clean boundaries. The bridge handles communication between them. If you want three AIs, you run three app instances.
 
-## Relationship to Harnesses
+## Relationship to AI Apps
 
-OpenClaw is one harness. Claude Code CLI is another. LDM OS is the layer underneath. Each agent in `~/.ldm/agents/` is a complete identity that any harness can boot from.
+OpenClaw is one AI app. Claude Code is another. LDM OS is the layer underneath. Each AI in `~/.ldm/agents/` is a complete personality that any app can start from.
 
-Future agents will run on different harnesses but boot from the same LDM OS structure. A Letta agent reads its soul from `~/.ldm/agents/[name]/`. A Grok TUI agent reads from the same structure. Different runtime, same identity architecture.
+Future AIs will run on different apps but start from the same LDM OS structure. A Letta AI reads its personality from `~/.ldm/agents/[name]/`. A Grok AI reads from the same structure. Different app, same personality system.

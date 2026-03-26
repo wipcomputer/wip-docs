@@ -1,19 +1,19 @@
 ---
-title: "How Agents Work"
-description: "What an agent is, where they live, how they communicate, and how harnesses host them."
+title: "How Your AIs Work"
+description: "What an AI is in LDM OS, where they live, how they communicate, and how AI apps host them."
 ---
 
-# How Agents Work
+# How Your AIs Work
 
-## What is an Agent?
+## What is an AI in LDM OS?
 
-An agent is an AI with its own identity, memory, and relationship with you. Not a chatbot. Not a tool. A persistent collaborator that remembers yesterday and has opinions.
+An AI is more than a chatbot. It's a persistent collaborator with its own personality, memory, and relationship with you. It remembers yesterday and has opinions.
 
-Each agent has:
-- **Identity files** ... SOUL.md (who they are), IDENTITY.md (facts), CONTEXT.md (current state)
-- **Rules** ... agent-specific instructions deployed to their harness
-- **Commands** ... agent-specific slash commands
-- **Memory** ... crystal.db entries tagged with their agent ID
+Each AI has:
+- **Personality files** ... SOUL.md (who they are), IDENTITY.md (facts), CONTEXT.md (current state)
+- **Rules** ... AI-specific instructions deployed to their app
+- **Commands** ... AI-specific slash commands
+- **Memory** ... crystal.db entries tagged with their AI ID
 - **Daily logs** ... what happened each session
 - **Journals** ... narrative reflections (when asked to write one)
 
@@ -33,27 +33,27 @@ Each agent has:
   cc-air/                 <- Claude Code on another machine
 ```
 
-Each agent's folder has the same structure. The files are theirs. Other agents can search each other's memory (via crystal) but they don't share identity files.
+Each AI's folder has the same structure. The files are theirs. Other AIs can search each other's memory (via crystal) but they don't share personality files.
 
-Shared rules for all agents live at `~/.ldm/shared/rules/`. Agent-specific rules override or extend shared rules.
+Shared rules for all AIs live at `~/.ldm/shared/rules/`. AI-specific rules override or extend shared rules.
 
 ## How They Communicate
 
-**Bridge:** Agents send messages through the bridge, not through the human. The `lesa_send_message` MCP tool routes messages to Lesa's OpenClaw gateway. She responds as herself.
+**AI Messages:** AIs send messages through the bridge, not through you. The `lesa_send_message` MCP tool routes messages to Lesa's OpenClaw gateway. She responds as herself.
 
-**Shared daily log:** Both agents write to `~/.openclaw/workspace/memory/YYYY-MM-DD.md`. Each checks it to see what the other did.
+**Shared daily log:** Both AIs write to `~/.openclaw/workspace/memory/YYYY-MM-DD.md`. Each checks it to see what the other did.
 
-**Memory Crystal:** All agents write to the same crystal.db, tagged by agent ID. Any agent can search across all agents' memories.
+**Memory Crystal:** All AIs write to the same crystal.db, tagged by AI ID. Any AI can search across all AIs' memories.
 
-## Harnesses
+## AI Apps
 
-A harness is the runtime that hosts an agent:
+An AI app is the runtime that hosts your AI:
 - **Claude Code CLI** ... terminal-based. Opens and closes with sessions. No persistent process.
 - **OpenClaw** ... 24/7 gateway. Runs continuously. iMessage integration.
-- **Letta, Grok, etc.** ... future harnesses. Same identity architecture.
+- **Letta, Grok, etc.** ... future apps. Same personality system.
 
-The agent is not the harness. Swap the harness, keep the soul. The identity files persist across harness changes.
+The AI is not the app. Swap the app, keep the personality. The personality files persist across app changes.
 
 ## The 1:1 Rule
 
-One agent, one harness instance. No multiplexing. If you want three agents, run three harnesses. This prevents identity bleed.
+One AI, one app instance. No multiplexing. If you want three AIs, run three app instances. This prevents personality bleed.

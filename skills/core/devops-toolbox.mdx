@@ -1,17 +1,17 @@
 ---
-title: "AI DevOps Toolbox"
+title: "AI Code Toolbox"
 description: "The complete toolkit for AI-assisted software development. Release pipeline, license compliance, repo management, identity protection."
 ---
 
-# AI DevOps Toolbox
+# AI Code Toolbox
 
-Want your AI to dev? Here's what's working for us at WIP Computer.
+Want your AI to help with real development? Here's what's working for us at WIP Computer.
 
-Your AI writes code. But does it know how to release it? Check license compliance? Protect your identity files? Sync private repos to public? Follow a real development process?
+Your AI writes code. But does it know how to release it? Check license compliance? Protect your important files? Sync private repos to public? Follow a real development process?
 
-AI DevOps Toolbox is the complete toolkit. Built by a team of humans and AIs shipping real software together.
+AI Code Toolbox is the complete toolkit. Built by a team of humans and AIs shipping real software together.
 
-## Teach Your AI to Use DevOps Toolbox
+## Teach Your AI to Use AI Code Toolbox
 
 Open your AI and paste this:
 
@@ -19,12 +19,12 @@ Open your AI and paste this:
 Read wip.computer/install/wip-ai-devops-toolbox.txt
 
 Then explain:
-1. What is AI DevOps Toolbox?
+1. What is AI Code Toolbox?
 2. What does it install on my system?
 3. What changes for us? (this AI)
 4. What changes across all my AIs?
 
-Check if AI DevOps Toolbox is already installed.
+Check if AI Code Toolbox is already installed.
 
 If it is, show me what I have and what's new.
 
@@ -37,16 +37,16 @@ If I say yes, run: ldm install wipcomputer/wip-ai-devops-toolbox --dry-run
 Show me exactly what will change. Don't install anything until I say "install".
 ```
 
-Your agent will read the spec, explain everything, and do a dry-run install first so you can see exactly what changes before anything is written to your system.
+Your AI will read the spec, explain everything, and do a dry-run install first so you can see exactly what changes before anything is written to your system.
 
 ## Features
 
-Every tool ships as one or more **interfaces:** the ways you and your AI can use it. **CLI** runs in your terminal. **Module** imports into your code. **MCP** connects to any AI that supports Model Context Protocol. **OC Plugin** plugs into the OpenClaw agent platform. **Skill** teaches your AI how to use the tool via a SKILL.md file. **CC Hook** runs automatically inside Claude Code on specific events.
+Every tool ships as one or more **interfaces:** the ways you and your AI can use it. **CLI** runs in your terminal. **Module** imports into your code. **Connection** links to any MCP-compatible AI. **Background Integration** works inside OpenClaw. **Skill** teaches your AI how to use the tool via a SKILL.md file. **Automation Hook** runs automatically inside Claude Code on specific events.
 
 ### Setup and Onboarding
 
-**Universal Installer**
-- Teaches your AI to take anything you build and make it work across every AI interface. You write code in any language. This tool turns it into a CLI, MCP Server, OpenClaw Plugin, Skill, and Claude Code Hook. One command, all six interfaces.
+**Smart Installer**
+- Teaches your AI to take anything you build and make it work across every AI. You write code in any language. This tool turns it into a CLI, connection point, background integration, skill, and automation hook. One command, all interfaces.
 - Detects what a repo supports and deploys it all. Toolbox mode walks every sub-tool automatically.
 - **Interfaces:** CLI, Module, Skill
 - *Stable*
@@ -55,7 +55,7 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 - Your team's conventions, baked in. Release process, repo structure, branch protection, the `ai/` folder standard.
 - Best practices for AI-assisted development teams. Covers everything from branching to compliance.
 
-### Infrastructure
+### Automation
 
 **LDM Dev Tools.app**
 - Scheduled automation that runs whether anyone remembers or not. Backup, branch protection audit, visibility audit.
@@ -66,18 +66,18 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 
 **Repo Visibility Guard**
 - Never accidentally expose a private repo.
-- Blocks repos from going public without a `-private` counterpart. Catches accidental exposure of internal plans, todos, and development context before it happens.
-- **Interfaces:** CLI, Module, MCP, OpenClaw, Skill, CC Hook
+- Blocks repos from going public without a `-private` counterpart. Catches accidental exposure of internal plans and development context before it happens.
+- **Interfaces:** CLI, Module, Connection, Background Integration, Skill, Automation Hook
 - *Stable*
 
 **Repo Manifest Reconciler**
 - Know where every repo belongs. One source of truth for folder structure.
-- Like prettier for folder structure. Move folders around all day; on sync, everything snaps back to where the manifest says.
-- **Interfaces:** CLI, Module, MCP, Skill
+- Like an auto-formatter for folder structure. Move folders around all day; on sync, everything snaps back to where the manifest says.
+- **Interfaces:** CLI, Module, Connection, Skill
 - *Stable*
 
 **Repo Init**
-- Scaffold the standard `ai/` directory in any repo. Plans, notes, ideas, dev updates, todos. One command.
+- Set up the standard `ai/` directory in any repo. Plans, notes, ideas, dev updates, todos. One command.
 - New repo: creates the full structure. Existing repo: moves old `ai/` contents to `ai/_sort/ai_old/` so you can sort at your own pace. Nothing is deleted.
 - **Interfaces:** CLI, Skill
 - *Stable*
@@ -88,35 +88,35 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 - *Stable*
 
 **Forced Git Worktrees**
-- Every repo uses git worktrees. Agents never edit on main. Period.
-- When an agent needs to make changes, it creates a worktree (isolated copy of the repo on its own branch). All edits happen there. Main stays clean. Multiple agents can work on the same repo simultaneously without collisions.
-- **Interfaces:** CLI, CC Hook
+- Every repo uses git worktrees. Your AIs never edit on main. Period.
+- When an AI needs to make changes, it creates a worktree (an isolated copy of the repo on its own branch). All edits happen there. Main stays clean. Multiple AIs can work on the same repo at the same time without conflicts.
+- **Interfaces:** CLI, Automation Hook
 - *Stable*
 
 **Branch Guard**
 - Blocks all writes on main. The enforcement layer for forced worktrees.
-- PreToolUse hook that catches Write, Edit, and destructive Bash commands. Resolves the repo from the file path, not the CWD, so it works when Claude Code opens in a different directory.
-- **Interfaces:** CC Hook
+- A safety check that catches Write, Edit, and destructive commands. Figures out the repo from the file path, not the working directory, so it works no matter where your AI started.
+- **Interfaces:** Automation Hook
 - *Stable*
 
 ### License, Compliance, and Protection
 
 **Identity File Protection**
-- Know what it can never overwrite. CLAUDE.md, SOUL.md, MEMORY.md, SHARED-CONTEXT.md are permanently protected.
-- Blocks destructive edits to protected identity files. Your AI can read them but can't blow them away.
-- **Interfaces:** CLI, Module, OpenClaw, Skill, CC Hook
+- Your AI knows what it can never overwrite. CLAUDE.md, SOUL.md, MEMORY.md, SHARED-CONTEXT.md are permanently protected.
+- Blocks destructive edits to protected personality and memory files. Your AI can read them but can't blow them away.
+- **Interfaces:** CLI, Module, Background Integration, Skill, Automation Hook
 - *Stable*
 
 **License Guard**
 - Enforce licensing on every commit. Copyright, dual-license, CLA. Checked automatically.
-- Ensures your own repos have correct copyright, license type, and LICENSE files. Interactive first-run setup. Toolbox-aware: checks every sub-tool. Auto-fix mode repairs issues.
+- Ensures your repos have correct copyright, license type, and LICENSE files. Interactive first-run setup. Toolbox-aware: checks every sub-tool. Auto-fix mode repairs issues.
 - **Interfaces:** CLI
 - *Stable*
 
-**License Rug-Pull Detection**
+**License Change Detection**
 - Catch license changes in dependencies before they ship.
-- Scans every dependency for license changes. Blocks merges if a license changed upstream. Daily cron scan. Generates a public compliance dashboard.
-- **Interfaces:** CLI, Module, MCP, Skill
+- Scans every dependency for license changes. Blocks merges if a license changed upstream. Daily scan. Generates a public compliance dashboard.
+- **Interfaces:** CLI, Module, Connection, Skill
 - *Stable*
 
 ### Release and Deploy
@@ -124,7 +124,7 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 **Release Pipeline**
 - Release software correctly. Version bump, changelog, npm publish, GitHub release. One command, nothing forgotten.
 - SKILL.md sync, release notes on the branch for PR review. Warns when notes are too short or look like changelogs instead of narrative.
-- **Interfaces:** CLI, Module, MCP, Skill
+- **Interfaces:** CLI, Module, Connection, Skill
 - *Stable*
 
 **Private-to-Public Sync**
@@ -147,12 +147,12 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 
 ## Interface Coverage
 
-| # | Tool | CLI | Module | MCP | OC Plugin | Skill | CC Hook |
-|---|------|-----|--------|-----|-----------|-------|---------|
+| # | Tool | CLI | Module | Connection | Background | Skill | Hook |
+|---|------|-----|--------|-----------|------------|-------|------|
 | | **Setup and Onboarding** | | | | | | |
-| 1 | Universal Installer | Y | Y | | | Y | |
+| 1 | Smart Installer | Y | Y | | | Y | |
 | 2 | Dev Guide | | | | | | |
-| | **Infrastructure** | | | | | | |
+| | **Automation** | | | | | | |
 | 3 | LDM Dev Tools.app | | | | | | |
 | | **Repo Management** | | | | | | |
 | 4 | Repo Visibility Guard | Y | Y | Y | Y | Y | Y |
@@ -164,7 +164,7 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 | | **License, Compliance, and Protection** | | | | | | |
 | 10 | Identity File Protection | Y | Y | | Y | Y | Y |
 | 11 | License Guard | Y | | | | | |
-| 12 | License Rug-Pull Detection | Y | Y | Y | | Y | |
+| 12 | License Change Detection | Y | Y | Y | | Y | |
 | | **Release and Deploy** | | | | | | |
 | 13 | Release Pipeline | Y | Y | Y | | Y | |
 | 14 | Private-to-Public Sync | Y | | | | Y | |
@@ -178,7 +178,7 @@ Every tool ships as one or more **interfaces:** the ways you and your AI can use
 ### Quick Start
 
 ```bash
-# Install LDM OS (shared infrastructure for all your AI tools)
+# Install LDM OS (the shared system for all your AIs)
 npm install -g @wipcomputer/wip-ldm-os
 ldm init
 
@@ -192,9 +192,9 @@ ldm install wipcomputer/wip-ai-devops-toolbox
 ldm doctor
 ```
 
-### Universal Installer
+### Smart Installer
 
-The Universal Interface specification for agent-native software. Defines how every tool ships six interfaces: CLI, importable module, MCP Server, OpenClaw Plugin, Skill, Claude Code Hook. The detection engine powers `ldm install`.
+The Universal Interface specification for AI-native software. Defines how every tool ships six interfaces: CLI, importable module, connection point, background integration, skill, automation hook. The detection engine powers `ldm install`.
 
 ```bash
 ldm install /path/to/repo --dry-run     # Detect what interfaces a repo supports
@@ -225,7 +225,7 @@ wip-release major
 
 ### wip-license-hook
 
-License rug-pull detection. Scans every dependency and fork for license changes. Pre-pull hook blocks merges if a license changed upstream. Pre-push hook alerts. Daily cron scan.
+License change detection. Scans every dependency and fork for license changes. Pre-pull hook blocks merges if a license changed upstream. Pre-push hook alerts. Daily scan.
 
 ```bash
 wip-license-hook scan
@@ -243,14 +243,14 @@ wip-repo-permissions audit wipcomputer
 
 ### wip-file-guard
 
-Hook that blocks destructive edits to protected identity files. Two rules: block `Write` on protected files entirely, block `Edit` when removing more than 2 lines or replacing more than 4 lines.
+A safety check that blocks destructive edits to protected personality and memory files. Two rules: block `Write` on protected files entirely, block `Edit` when removing more than 2 lines or replacing more than 4 lines.
 
 ### wip-branch-guard
 
 Blocks all writes on main branch. The enforcement layer for required worktrees.
 
 Features:
-- **Workflow teaching:** Error messages include the full 8-step dev process. Agents learn the workflow from the error.
+- **Workflow teaching:** Error messages include the full 8-step dev process. Your AI learns the workflow from the error.
 - **Worktree path warning:** Warns when `git worktree add` creates outside `_worktrees/`.
 - **Dogfood cooldown:** After `wip-release`, blocks `npm install -g` for 5 minutes.
 - **Dangerous flag blocking:** `--no-verify` and `git push --force` blocked on any branch.
@@ -258,7 +258,7 @@ Features:
 
 ### deploy-public.sh
 
-Private-to-public repo sync. Rsyncs all files except `ai/` from private to public repo clone. Creates a branch, commits with co-authors, pushes, creates PR, merges, creates matching GitHub release, publishes to npm and GitHub Packages.
+Private-to-public repo sync. Copies all files except `ai/` from private to public repo. Creates a branch, commits with co-authors, pushes, creates PR, merges, creates matching GitHub release, publishes to npm and GitHub Packages.
 
 ```bash
 bash deploy-public.sh /path/to/private-repo wipcomputer/public-repo
@@ -267,7 +267,7 @@ bash deploy-public.sh /path/to/private-repo wipcomputer/public-repo --dry-run
 
 ### Source Code
 
-All implementation source is committed in the repo. No closed binaries, no mystery boxes.
+All source is committed in the repo. No closed binaries, no hidden code.
 
 | Tool | Language | Build step? |
 |------|----------|-------------|
@@ -286,15 +286,14 @@ All implementation source is committed in the repo. No closed binaries, no myste
 
 ## Part of LDM OS
 
-AI DevOps Toolbox installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os), the local runtime for AI agents.
-Run `ldm install` to see other components you can add.
+AI Code Toolbox installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os), the shared system for all your AIs.
+Run `ldm install` to see other tools you can add.
 
 ## License
 
 Dual-license model designed to keep tools free while preventing commercial resellers.
 
 ```
-MIT      All CLI tools, MCP servers, skills, and hooks (use anywhere, no restrictions).
+MIT      All CLI tools, connections, and background integrations (use anywhere, no restrictions).
 AGPLv3   Commercial redistribution, marketplace listings, or bundling into paid services.
 ```
-

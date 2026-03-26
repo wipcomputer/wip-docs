@@ -1,22 +1,22 @@
 ---
 title: "Install LDM OS"
-description: "Install LDM OS to give all your AIs shared identity, memory, and tools. One command, one folder, every AI."
+description: "Install LDM OS to give all your AIs shared memory, personality, and tools. One command, one folder, every AI."
 ---
 
 # Install LDM OS
 
 ## All your AIs. One system.
 
-You use Claude Code, GPT, OpenClaw, others. They don't share memory. They don't know each other. They don't know how to work together.
+You use Claude Code, GPT, OpenClaw, and others. They don't share memory. They don't know each other. They can't work together.
 
-LDM OS is the shared infrastructure layer. Install it once and every AI you use gets:
+LDM OS connects them. Install it once and every AI you use gets:
 
-- **Identity** ... each AI gets its own behavior, personality, and skills
-- **Memory** ... shared memory across all your AIs, secure, sovereign, yours to take anywhere
-- **Ownership** ... every interaction, every memory, across every AI you use is yours, portable, encrypted, never locked in
-- **Collaboration** ... your AIs communicate, share tools, and work together
-- **Compatibility** ... any skill, plugin, or tool works with all your AIs. Install once, use everywhere.
-- **Payments** ... your AI hits a paywall, you approve it with Face ID, Apple Pay for your AI
+- **Personality** ... each AI gets its own behavior, voice, and skills
+- **Memory** ... shared memory across all your AIs, private and portable
+- **Ownership** ... every conversation, every memory, across every AI is yours. Take it anywhere.
+- **Teamwork** ... your AIs communicate, share tools, and collaborate
+- **Compatibility** ... any tool works with all your AIs. Install once, use everywhere.
+- **Payments** ... your AI hits a paywall, you approve it with Face ID. Apple Pay for your AIs.
 
 ## Quick Start
 
@@ -47,29 +47,29 @@ Your AI reads the spec, checks what you have, and walks you through a dry run be
 
 ## What does it install?
 
-LDM OS creates a single directory at `~/.ldm/`:
+LDM OS creates a single folder at `~/.ldm/`:
 
-| Directory | What it contains |
-|-----------|-----------------|
-| `~/.ldm/extensions/` | Where tools and plugins live |
-| `~/.ldm/agents/` | Each AI gets its own identity, personality, and memory here |
-| `~/.ldm/memory/` | Shared memory across all your AIs (including the Memory Crystal) |
+| Folder | What's inside |
+|--------|--------------|
+| `~/.ldm/extensions/` | Your installed tools |
+| `~/.ldm/agents/` | Each AI gets its own personality, memory, and journals here |
+| `~/.ldm/memory/` | Shared memory across all your AIs (including Memory Crystal) |
 | `~/.ldm/state/` | Configuration and sync state |
-| `~/.ldm/shared/rules/` | Dev conventions deployed to every AI harness |
+| `~/.ldm/shared/rules/` | Your rules and conventions, deployed to every AI app |
 
 ## What changes for this AI?
 
-- Boot sequence reads from `~/.ldm/agents/` (identity, memory, daily logs)
-- Rules deployed to `~/.claude/rules/` (git conventions, security, release pipeline)
-- Extensions like Memory Crystal and wip-release are managed centrally
-- Stop hooks write to crystal and daily logs after every turn
+- On startup, your AI reads its personality and memory from `~/.ldm/agents/`
+- Your rules are synced to your AI app automatically
+- Tools like Memory Crystal are managed from one place
+- After every conversation, memories are saved automatically
 
 ## What changes across all my AIs?
 
-- Shared memory (crystal.db) accessible to every AI
-- Shared rules (same conventions everywhere)
-- Shared extensions (install once, every AI sees it)
-- Agent identity (each AI is its own entity with its own prefix)
+- Shared memory accessible to every AI you use
+- Same rules everywhere (consistency without repetition)
+- Shared tools (install once, every AI sees it)
+- Each AI keeps its own personality while sharing the same foundation
 
 ## Manual Install
 
@@ -79,7 +79,7 @@ If you prefer to install manually instead of using the AI-guided prompt:
 # Install the CLI
 npm install -g @wipcomputer/wip-ldm-os
 
-# Initialize the shared workspace
+# Set up the shared home
 ldm init
 
 # Preview what will be installed
@@ -97,6 +97,6 @@ After installing, check that everything is working:
 # Check system health
 ldm doctor
 
-# Show installed components
+# Show installed tools
 ldm status
 ```

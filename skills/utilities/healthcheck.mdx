@@ -1,11 +1,11 @@
 ---
 title: "Healthcheck"
-description: "External health watchdog for OpenClaw and LDM OS. Monitors gateway health, token usage, file descriptors, and memory systems."
+description: "Keeps your AI running smoothly. Watches for problems and fixes them automatically. Includes daily backups."
 ---
 
-# wip-healthcheck
+# Healthcheck
 
-External health watchdog for OpenClaw and LDM OS. Monitors gateway health, token usage, file descriptors, and memory systems. Includes a daily backup system with verification.
+Keeps your AI running smoothly. Watches for problems, fixes what it can, and alerts you about the rest. Includes a daily backup system with verification.
 
 Zero npm dependencies. Runs via macOS LaunchAgent.
 
@@ -13,16 +13,16 @@ Zero npm dependencies. Runs via macOS LaunchAgent.
 
 Runs every 3 minutes and checks:
 
-1. **Gateway process** ... is `openclaw-gateway` running?
+1. **Gateway process** ... is your AI's gateway running?
 2. **HTTP probe** ... does the gateway respond to requests?
-3. **File descriptors** ... is the gateway approaching EMFILE limits?
+3. **File descriptors** ... is the gateway approaching system limits?
 4. **Token usage** ... are any sessions near context window capacity?
-5. **Memory health** (every 5th run) ... NULL embedding vectors, API key errors, session export freshness, Crystal capture errors
+5. **Memory health** (every 5th run) ... NULL embedding vectors, API key errors, session export freshness, memory capture errors
 
 When something fails:
-- **Auto-restart:** Restarts the gateway via `launchctl` (rate-limited)
-- **Agent alert:** Sends a message to your agent via the chatCompletions endpoint
-- **iMessage fallback:** Direct iMessage to operator if the agent is unreachable
+- **Auto-restart:** Restarts the gateway automatically (rate-limited so it doesn't loop)
+- **AI alert:** Sends a message to your AI via the chat endpoint
+- **iMessage fallback:** Direct iMessage to you if the AI is unreachable
 
 ## Install
 
@@ -44,7 +44,7 @@ bash install-backup.sh
 
 This installs:
 - A LaunchAgent that runs daily backups at midnight
-- A cron job that verifies the backup at 00:30
+- A scheduled job that verifies the backup at 00:30
 
 ## Configuration
 
@@ -82,8 +82,8 @@ Copy `config.example.json` to `config.json` and edit:
 |-------|------|---------|
 | `gateway.token` | Gateway auth token. Auto-read from `openclaw.json` if empty. | `""` |
 | `escalation.escalationContact` | iMessage address for direct fallback alerts. | `""` |
-| `escalation.viaAgent` | Try agent (chatCompletions) before iMessage. | `true` |
-| `paths.openclawHome` | OpenClaw home dir. | `$OPENCLAW_HOME` or `~/.openclaw` |
+| `escalation.viaAgent` | Try alerting your AI before iMessage. | `true` |
+| `paths.openclawHome` | OpenClaw home folder. | `$OPENCLAW_HOME` or `~/.openclaw` |
 | `paths.backupRoot` | Where daily backups go. Empty skips backup verification. | `""` |
 | `backup.retentionDays` | Days of backups to keep. | `7` |
 
@@ -105,7 +105,7 @@ Add custom backup sources to `backup.sources`:
 
 Types: `file` (copy), `tar` (archive directory), `dir` (recursive copy).
 
-If `sources` is empty, the backup script backs up core OpenClaw files automatically (crystal.db, context-embeddings.sqlite, main.sqlite, workspace, sessions, config).
+If `sources` is empty, the backup script backs up core files automatically (crystal.db, context-embeddings.sqlite, main.sqlite, workspace, sessions, config).
 
 ## Manual Run
 
@@ -127,11 +127,11 @@ bash uninstall.sh           # removes healthcheck LaunchAgent
 healthcheck.mjs         Main watchdog script
 backup.sh               Daily backup script (config-driven)
 backup-wrapper.mjs      Node wrapper for backup LaunchAgent
-verify-backup.sh        Backup verification (cron)
+verify-backup.sh        Backup verification (scheduled)
 config.json             Your config (not committed)
 config.example.json     Config template
 install.sh              Install healthcheck LaunchAgent
-install-backup.sh       Install backup LaunchAgent + verify cron
+install-backup.sh       Install backup LaunchAgent + verify job
 uninstall.sh            Remove healthcheck LaunchAgent
 ```
 
@@ -144,4 +144,3 @@ uninstall.sh            Remove healthcheck LaunchAgent
 ## License
 
 MIT
-
