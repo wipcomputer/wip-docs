@@ -12,6 +12,20 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/wipcomputer"
+        },
+        {
+          "anchor": "Agent Installer",
+          "icon": "download",
+          "href": "https://wip.computer/install/wip-ldm-os.txt"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "WIP Computer",
@@ -19,10 +33,25 @@
           {
             "group": "Overview",
             "pages": [
-              "index"
+              "index",
+              {
+                "group": "How Things Work",
+                "pages": [
+                  "guides/how-install-works",
+                  "guides/how-agents-work",
+                  "guides/how-worktrees-work",
+                  "guides/how-releases-work",
+                  "guides/how-backup-works",
+                  "guides/system-directories",
+                  "guides/local-first"
+                ]
+              }
             ]
           }
         ]
+      },
+      {
+        "tab": "Guides"
       },
       {
         "tab": "LDM OS",
@@ -96,39 +125,8 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "How Things Work",
-            "pages": [
-              "guides/how-install-works",
-              "guides/how-agents-work",
-              "guides/how-worktrees-work",
-              "guides/how-releases-work",
-              "guides/how-backup-works",
-              "guides/system-directories",
-              "guides/local-first"
-            ]
-          }
-        ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "GitHub",
-          "href": "https://github.com/wipcomputer",
-          "icon": "github"
-        },
-        {
-          "anchor": "Agent Installer",
-          "href": "https://wip.computer/install/wip-ldm-os.txt",
-          "icon": "download"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
