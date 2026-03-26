@@ -1,0 +1,48 @@
+---
+title: "Smart Installer"
+description: "Teaches your AI to take anything you build and make it work across every AI. One command, all interfaces."
+---
+
+# Smart Installer
+
+Teaches your AI to take anything you build and make it work across every AI. One command, all interfaces.
+
+You build a tool. It works in your terminal. But what about your AI assistant? Your automation hooks? Your MCP connections? Each interface is a different setup process, a different config, a different thing to remember.
+
+Smart Installer looks at your repo and figures out what it supports. CLI, module, connection point, background integration, skill, automation hook. It detects everything and deploys it all. One command.
+
+## What It Does
+
+- Detects which interfaces a repo supports
+- Installs CLI tools, MCP connections, skills, hooks, and background integrations
+- Toolbox mode: walks every sub-tool in a multi-tool repo automatically
+- Dry-run mode shows exactly what will change before anything is written
+
+## Install
+
+```bash
+npm install -g @wipcomputer/wip-ldm-os
+ldm init
+```
+
+## Usage
+
+```bash
+ldm install /path/to/repo --dry-run     # see what would be installed
+ldm install wipcomputer/wip-file-guard   # install from GitHub
+ldm install wipcomputer/wip-ai-devops-toolbox   # install a full toolbox
+```
+
+## How It Works
+
+Every tool in the LDM OS ecosystem follows the Universal Interface specification. Each repo declares what interfaces it supports. The installer reads those declarations and sets up each one in the right place.
+
+For toolbox repos (like AI Code Toolbox), the installer walks every sub-tool and installs them all in a single pass.
+
+## Interfaces
+
+CLI, Module, Skill.
+
+## Part of LDM OS
+
+Smart Installer is the core of [LDM OS](https://github.com/wipcomputer/wip-ldm-os). It's how everything else gets installed.

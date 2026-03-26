@@ -1,0 +1,41 @@
+---
+title: "Branch Guard"
+description: "Prevents accidental commits on main. Forces branches and worktrees."
+---
+
+# Branch Guard
+
+Prevents accidental commits on main. Forces branches and worktrees.
+
+Your AI is helpful. Sometimes too helpful. It sees a file, fixes it, and commits... straight to main. No branch. No PR. No review. Just a direct write to the branch that matters most.
+
+Branch Guard stops that. Every write, edit, and destructive command gets checked. If you're on main, it blocks the action and tells you exactly what to do instead.
+
+## What It Does
+
+- Blocks all writes on the main branch
+- Catches `Write`, `Edit`, and destructive git commands
+- Figures out the repo from the file path, not the working directory
+- Works no matter where your AI started its session
+
+## Extra Protection
+
+- **Workflow teaching.** Error messages include the full development process. Your AI learns the right way from the error itself.
+- **Worktree path warning.** Warns when `git worktree add` creates outside the `_worktrees/` directory.
+- **Dogfood cooldown.** After `wip-release`, blocks `npm install -g` for 5 minutes so you test the install prompt first.
+- **Dangerous flag blocking.** `--no-verify` and `git push --force` are blocked on every branch.
+- **Shared state allowlist.** CLAUDE.md, SHARED-CONTEXT.md, and daily logs stay writable on main.
+
+## Install
+
+```bash
+ldm install wipcomputer/wip-ai-devops-toolbox
+```
+
+## Interfaces
+
+Automation Hook.
+
+## Part of LDM OS
+
+Branch Guard is part of [AI Code Toolbox](/skills/core/devops-toolbox), which installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os).

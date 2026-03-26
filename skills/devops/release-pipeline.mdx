@@ -1,0 +1,58 @@
+---
+title: "Release Pipeline"
+description: "Release software correctly. Version bump, changelog, npm publish, GitHub release. One command, nothing forgotten."
+---
+
+# Release Pipeline
+
+Release software correctly. Version bump, changelog, npm publish, GitHub release. One command, nothing forgotten.
+
+You've seen it happen. Someone bumps the version but forgets the changelog. Publishes to npm but skips the GitHub release. Tags the repo but never syncs the SKILL.md. Each step is simple. Remembering all of them every time is the hard part.
+
+Release Pipeline handles the full sequence. You run one command. It does everything else.
+
+## What It Does
+
+1. Bumps the version (patch, minor, or major)
+2. Syncs SKILL.md with the new version
+3. Generates a changelog entry
+4. Commits and tags
+5. Publishes to npm and GitHub Packages
+6. Creates a GitHub release with your notes
+
+## Install
+
+```bash
+ldm install wipcomputer/wip-ai-devops-toolbox
+```
+
+## Usage
+
+```bash
+wip-release patch      # auto-detects RELEASE-NOTES-v{version}.md
+wip-release minor --dry-run
+wip-release major
+```
+
+Release notes are mandatory. Write a `RELEASE-NOTES-v{version}.md` file on your feature branch. Commit it with the code. The PR shows both the code and the notes together.
+
+## Quality Gates
+
+Before anything publishes, the pipeline checks:
+
+- Release notes exist and come from a file (not a flag)
+- Notes reference at least one GitHub issue
+- Product docs are updated
+- Technical docs are updated if source changed
+- No stale merged branches hanging around
+- Running from the main working tree (not a worktree)
+
+If any gate fails, nothing ships. Fix and re-run.
+
+## Interfaces
+
+CLI, Module, Connection, Skill.
+
+## Part of LDM OS
+
+Release Pipeline is part of [AI Code Toolbox](/skills/core/devops-toolbox), which installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os).

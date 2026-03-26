@@ -1,0 +1,42 @@
+---
+title: "CLVR"
+description: "macOS utility that auto-timestamps duplicated file names."
+---
+
+# CLVR
+
+macOS utility that auto-timestamps duplicated file names.
+
+You duplicate a file in Finder. macOS names it "document copy.pdf". Not helpful. CLVR watches for duplicated files and renames them with a timestamp instead.
+
+## What It Does
+
+- Watches for files with "copy" in the name
+- Renames them with a clean timestamp format
+- Runs quietly in the background on macOS
+
+## Example
+
+Before:
+```
+design-mockup copy.png
+design-mockup copy 2.png
+```
+
+After:
+```
+design-mockup-2026-03-15-1430.png
+design-mockup-2026-03-15-1431.png
+```
+
+Every duplicate gets a unique, sortable name. No more "copy copy copy."
+
+## Install
+
+```bash
+ldm install wipcomputer/clvr
+```
+
+## Part of LDM OS
+
+CLVR installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os), the shared system for all your AIs.
