@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "WIP Computer",
+  "name": "wip",
   "colors": {
     "primary": "#FFFFFF",
     "light": "#FFFFFF",
