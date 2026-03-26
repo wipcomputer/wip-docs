@@ -17,9 +17,38 @@
         "tab": "WIP Computer",
         "groups": [
           {
-            "group": "Overview",
+            "group": "",
             "pages": [
               "index"
+            ]
+          },
+          {
+            "group": "Products",
+            "pages": [
+              "ldm-os/introduction",
+              "skills/core/memory-crystal",
+              "skills/core/devops-toolbox",
+              "skills/core/dream-weaver"
+            ]
+          },
+          {
+            "group": "More Tools",
+            "pages": [
+              "skills/utilities/1password",
+              "skills/apis/xai-grok",
+              "skills/apis/x-platform",
+              "skills/utilities/markdown-viewer",
+              "skills/utilities/healthcheck",
+              "ldm-os/features/bridge"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/how-install-works",
+              "guides/how-agents-work",
+              "guides/how-releases-work",
+              "guides/system-directories"
             ]
           }
         ]
