@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "wip",
   "colors": {
-    "primary": "#171717",
-    "light": "#171717",
-    "dark": "#EDEDED"
+    "primary": "#16A34A",
+    "light": "#16A34A",
+    "dark": "#4ADE80"
   },
   "appearance": {
     "default": "dark"
@@ -13,17 +13,6 @@
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
-      {
-        "tab": "WIP Computer",
-        "groups": [
-          {
-            "group": "",
-            "pages": [
-              "index"
-            ]
-          }
-        ]
-      },
       {
         "tab": "LDM OS",
         "groups": [
