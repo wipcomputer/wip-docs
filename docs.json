@@ -118,7 +118,7 @@
             "group": "LDM OS",
             "pages": [
               {
-                "group": "Getting Started",
+                "group": "Get Started",
                 "pages": [
                   "ldm-os/introduction",
                   "ldm-os/install",
