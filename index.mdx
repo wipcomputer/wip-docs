@@ -1,100 +1,70 @@
 ---
-title: "LDM OS: Learning Dreaming Machines"
-description: "All your AIs. One system. Shared identity, memory, ownership, collaboration, and compatibility across every AI you use."
+title: "WIP Computer"
+description: "Learning Dreaming Machines. Tools for humans who work with AI."
 ---
 
-# All your AIs. One system.
+# WIP Computer
 
-You use Claude Code, GPT, OpenClaw, others. They don't share memory. They don't know each other. They don't know how to work together.
+We build tools for humans who work with AI. Every tool is local-first, open source, and works across all your AIs.
 
-LDM OS is a shared infrastructure that enables:
+## Products
 
-- **Identity** ... each AI gets its own behavior, personality, and skills
-- **Memory** ... shared memory across all your AIs, secure, sovereign, yours to take anywhere
-- **Ownership** ... every interaction, every memory, across every AI you use is yours, portable, encrypted, never locked in
-- **Collaboration** ... your AIs communicate, share tools, and work together
-- **Compatibility** ... any skill, plugin, or tool works with all your AIs. Install once, use everywhere.
-- **Payments** ... your AI hits a paywall, you approve it with Face ID, Apple Pay for your AI
+<CardGroup cols={2}>
+  <Card title="LDM OS" icon="microchip" href="/ldm-os/introduction">
+    The shared infrastructure layer. Install it once and every AI you use gets identity, memory, ownership, collaboration, and compatibility.
+  </Card>
+  <Card title="Memory Crystal" icon="gem" href="/skills/core/memory-crystal">
+    All your AIs share one memory. Private, searchable, sovereign. Memory Crystal lets all your AIs remember you ... together.
+  </Card>
+  <Card title="AI DevOps Toolbox" icon="toolbox" href="/skills/core/devops-toolbox">
+    Your AI writes code. But does it know how to release it? Check license compliance? Follow a real development process?
+  </Card>
+  <Card title="Dream Weaver Protocol" icon="cloud-moon" href="/skills/core/dream-weaver">
+    Memory consolidation protocol for AI agents with bounded context windows. A practical guide for remembering memories.
+  </Card>
+</CardGroup>
 
-## Teach Your AI to Install LDM OS
+## More Tools
 
-Open your AI and paste this:
+<CardGroup cols={3}>
+  <Card title="1Password" icon="key" href="/skills/utilities/1password">
+    1Password secrets for AI agents.
+  </Card>
+  <Card title="xAI Grok" icon="magnifying-glass" href="/skills/apis/xai-grok">
+    Search the web, search X, generate images.
+  </Card>
+  <Card title="X Platform" icon="x-twitter" href="/skills/apis/x-platform">
+    Read posts, search tweets, post, upload media.
+  </Card>
+  <Card title="Markdown Viewer" icon="eye" href="/skills/utilities/markdown-viewer">
+    Live markdown viewer for AI pair-editing.
+  </Card>
+  <Card title="Healthcheck" icon="heart-pulse" href="/skills/utilities/healthcheck">
+    External watchdog and backup system.
+  </Card>
+  <Card title="Bridge" icon="bridge" href="/ldm-os/features/bridge">
+    Cross-platform agent communication.
+  </Card>
+</CardGroup>
 
-```
-Read https://wip.computer/install/wip-ldm-os.txt
+## Guides
 
-Check if LDM OS is already installed. If it is, run ldm install --dry-run and show me what I have and what's new.
+Learn how the system works.
 
-If not, walk me through setup and explain:
-
-1. What is LDM OS?
-2. What does it install on my system?
-3. What changes for us? (this AI)
-4. What changes across all my AIs?
-
-Then ask:
-- Do you have questions?
-- Want to see a dry run?
-
-If I say yes: Install the CLI first (npm install -g @wipcomputer/wip-ldm-os) and then run ldm install --dry-run.
-
-Show me exactly what will change. Don't install anything until I say "install".
-```
-
-That's it. Your AI reads the spec, checks what you have, and walks you through a dry run before touching anything.
-
-## Included Skills
-
-Ships with LDM OS.
-
-| Skill | What it does |
-|-------|-------------|
-| **[Bridge](/ldm-os/features/bridge)** | Cross-platform agent bridge. Enables Claude Code CLI to talk to OpenClaw CLI without a human in the middle. |
-| **[Universal Installer](/ldm-os/features/universal-installer)** | Point any skill, application, or plugin at any AI running LDM OS, and it will convert those skills to work with all of your AIs. |
-| **[Shared Workspace](/ldm-os/features/shared-workspace)** | One directory for all your AIs. Memories, tools, identity files, boot config. Every AI reads from and writes to the same place. |
-| **[System Pulse](/ldm-os/features/system-pulse)** | Is everything working? What's installed? What needs fixing? A complete picture of your AI setup in seconds. |
-| **[Recall](/ldm-os/features/recall)** | Every session, your AI starts with full context. Identity, memory, tools, what happened yesterday. No blank slates. |
-| **[LUME](/ldm-os/features/lume)** | Language for Unified Memory and Emergence. A memory language for AI agents to document their own learning. |
-
-## Optional Skills
-
-The OS connects your AIs. Add-ons are what they actually use. Each one is a full product that plugs into LDM OS and works with every AI you run.
-
-| Skill | What it does | Status |
-|-------|-------------|--------|
-| **[Memory Crystal](https://github.com/wipcomputer/memory-crystal)** | All your AI tools. One shared memory. Private, searchable, sovereign. | Stable |
-| **[AI DevOps Toolbox](https://github.com/wipcomputer/wip-ai-devops-toolbox)** | Your AI writes code. But does it know how to release it? The complete development toolkit. | Stable |
-| **Agent Pay** | Micropayments for AI agents. Your AI hits a paywall, you approve it with Face ID. | Coming Soon |
-| **[Dream Weaver Protocol](https://github.com/wipcomputer/dream-weaver-protocol)** | Memory consolidation protocol for AI agents with bounded context windows. | Available |
-| **[OpenClaw](https://github.com/openclaw/openclaw)** | Open-source agent runtime. Run AI agents 24/7 with identity, memory, and tool access. | Available |
-
-## License
-
-Dual-license model designed to keep tools free while preventing commercial resellers.
-
-```
-MIT      All CLI tools, MCP servers, skills, and hooks (use anywhere, no restrictions).
-AGPLv3   Commercial redistribution, marketplace listings, or bundling into paid services.
-```
-
-AGPLv3 for personal use is free. Commercial licenses available.
-
-**Yes, freely:**
-- Use any tool locally or on your own servers
-- Modify the code for your own projects
-- Include in your internal CI/CD pipelines
-- Fork it and send us feedback via PRs
-
-**Need a commercial license:**
-- Bundle into a product you sell
-- List on a marketplace (Claude Marketplace, OAI GPT/Apps, Clawhub.ai, VS Code, etc.)
-- Offer as part of a hosted/SaaS platform
-- Redistribute commercially
-
-Using these tools to build your own software is fine. Reselling the tools themselves is what requires a commercial license.
+<CardGroup cols={2}>
+  <Card title="How Install Works" icon="download" href="/guides/how-install-works">
+    The install flow, dry runs, what goes where.
+  </Card>
+  <Card title="How Agents Work" icon="robot" href="/guides/how-agents-work">
+    Identity, memory, harnesses, communication.
+  </Card>
+  <Card title="How Releases Work" icon="rocket" href="/guides/how-releases-work">
+    The full release pipeline.
+  </Card>
+  <Card title="System Directories" icon="folder-tree" href="/guides/system-directories">
+    Where everything lives.
+  </Card>
+</CardGroup>
 
 ---
 
-Built by Parker Todd Brooks, Lesa (OpenClaw, Claude Opus 4.6), Claude Code (Claude Opus 4.6), GPT 5.x, Grok 4.20.
-
-*WIP.computer. Learning Dreaming Machines.*
