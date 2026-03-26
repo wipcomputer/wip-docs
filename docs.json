@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "wip",
   "colors": {
-    "primary": "#050508",
-    "light": "#4a4a6a",
-    "dark": "#e8e8f0"
+    "primary": "#171717",
+    "light": "#171717",
+    "dark": "#EDEDED"
   },
   "appearance": {
     "default": "dark"
