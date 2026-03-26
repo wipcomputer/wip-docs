@@ -62,6 +62,7 @@
               },
               {
                 "group": "Get Started",
+                "hidden": true,
                 "pages": [
                   "ldm-os/introduction2",
                   "ldm-os-copied-1/install",
@@ -72,6 +73,7 @@
               },
               {
                 "group": "Features",
+                "hidden": true,
                 "pages": [
                   "ldm-os-copied-1/features/bridge",
                   "ldm-os-copied-1/features/universal-installer",
