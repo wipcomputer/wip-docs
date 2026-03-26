@@ -1,0 +1,99 @@
+---
+title: "Shared Workspace"
+description: "One folder for all your AIs. Memories, tools, personalities, and settings in a single place. Easy to back up, easy to move, easy to own."
+---
+
+# Shared Workspace
+
+## One folder. All your AIs.
+
+LDM OS creates a single folder on your computer where all your AIs share memory, tools, personalities, and settings.
+
+```
+~/.ldm/
+├── agents/              Each AI gets its own space
+│   ├── claude-code/     Personality, context, journals
+│   ├── openclaw/        Same structure, different AI
+│   └── .../
+├── extensions/          Tools installed via the Universal Installer
+├── memory/              Shared memory (crystal.db, daily logs)
+├── shared/              Startup files, shared settings
+└── version.json         What's installed
+```
+
+## How It Works
+
+Every AI that runs LDM OS reads from and writes to the same folder. Claude Code, GPT, OpenClaw ... any AI. They all see the same memory, the same tools, the same history.
+
+Each AI gets its own subfolder for personality files (who it is, how it behaves, its journals). But memory and tools are shared.
+
+## Backup
+
+Everything lives in one folder. Back it up however you back up anything else. iCloud, external drive, Dropbox, Time Machine. Move to a new computer by copying the folder.
+
+## Your Data is Sacred
+
+LDM OS never touches your existing data during install or update. Your memories, AI personality files, secrets, and state are protected. Updates only touch code and settings, never your data.
+
+Protected paths:
+- `memory/` (your memories, all search data)
+- `agents/` (personality, context, journals, transcripts)
+- `secrets/` (encryption keys, tokens)
+- `state/` (watermarks, capture state)
+- `backups/` (daily snapshots)
+
+Only `extensions/` and `shared/` are updated by `ldm install`.
+
+## Technical Details
+
+### Full Directory Structure
+
+```
+~/.ldm/
+  config.json                 Machine-level config
+  version.json                Installed version + timestamps
+  extensions/
+    registry.json             Tool metadata
+    memory-crystal/           Tool files
+    wip-release/              Tool files
+    ...
+  agents/
+    cc-mini/                  Claude Code on Mac Mini
+      IDENTITY.md
+      SOUL.md
+      CONTEXT.md
+      REFERENCE.md
+      config.json
+      memory/
+        transcripts/          Raw JSONL session files
+        sessions/             Per-session summaries
+        daily/                Daily log entries
+        journals/             Dream Weaver narrative output
+  memory/
+    crystal.db                Shared memory database (all AIs)
+  sessions/                   Active sessions (Session Register)
+  messages/                   Messages between sessions
+  shared/
+    boot/                     Startup hook files
+    cron/                     Scheduled scripts
+  state/                      Capture watermarks, role state
+  secrets/                    Encryption keys, relay tokens
+  bin/                        Scripts
+  backups/                    Daily backups
+```
+
+### AI Identity
+
+One AI per app per machine. The AI ID is predictable:
+
+| AI ID | App | Machine |
+|-------|-----|---------|
+| `cc-mini` | Claude Code CLI | Mac Mini |
+| `cc-air` | Claude Code CLI | MacBook Air |
+| `oc-lesa-mini` | OpenClaw | Mac Mini |
+
+All AIs share one `crystal.db`. Memory is shared. Personality is per-AI.
+
+## Part of LDM OS
+
+Shared Workspace is included with LDM OS. Run `ldm init` to create it.

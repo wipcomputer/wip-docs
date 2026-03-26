@@ -1,0 +1,155 @@
+---
+title: "Architecture"
+description: "How LDM OS gives each of your AIs its own personality, memory, and relationship with you. Same system, different people."
+---
+
+# Architecture
+
+Each of your AIs gets its own personality, memory, and relationship with you. Same system, different people.
+
+## What This Is
+
+LDM OS is the layer that sits underneath any AI app (OpenClaw, Claude Code, Letta, Grok, etc.) and gives each AI:
+
+- **Personality** ... who they are, how they behave, what they value
+- **Memory** ... conversations, daily logs, long-term recall
+- **Consolidation** ... Dream Weaver turns scattered memories into coherent understanding
+- **Sovereignty** ... your AI's personality is protected. The model underneath can change without losing who they are.
+
+## Directory Structure
+
+```
+~/.ldm/
+├── agents/
+│   ├── cc-mini/                 # Your Claude Code AI on this machine
+│   │   ├── IDENTITY.md
+│   │   ├── SOUL.md
+│   │   ├── CONTEXT.md
+│   │   ├── REFERENCE.md
+│   │   ├── memory/
+│   │   │   ├── daily/           # daily logs (one file per entry)
+│   │   │   └── journals/        # narrative journals
+│   │   └── config.json          # which app, which model, settings
+│   │
+│   ├── oc-lesa-mini/            # Another AI on the same machine
+│   └── [future-ai]/             # Add more AIs anytime
+│
+├── extensions/                  # your installed tools
+│   ├── registry.json            # what's installed + versions
+│   ├── memory-crystal/
+│   ├── wip-release/
+│   └── ...
+│
+├── memory/                      # shared memory (all your AIs can search this)
+├── logs/                        # all logs (survives reboots)
+├── tmp/                         # install staging
+├── state/                       # runtime state
+├── bin/                         # scripts
+├── hooks/                       # automation hooks
+├── backups/                     # daily backups
+│
+├── bridge/                      # how your AIs talk to each other
+│   ├── heartbeat/
+│   ├── inbox/
+│   └── exec-brief/
+│
+├── shared/
+│   ├── dream-weaver/
+│   ├── sovereignty/
+│   └── boot/
+│
+└── config.json                  # global LDM OS config
+```
+
+## Principles
+
+### Each AI is its own person
+
+Not a copy. Not a disposable instance. Each AI has its own history, voice, values, and relationship with you. The architecture supports multiple AIs, each with a distinct personality.
+
+### Same system, different personalities
+
+Every AI gets Memory Crystal, Dream Weaver, and identity protection. What they do with these tools is theirs. The system doesn't dictate personality. It protects it.
+
+### The personality is sovereign
+
+The model underneath can change. One model today, a better one tomorrow. The personality files persist. The identity persists. The model serves the personality, not the other way around.
+
+### Memory is personal
+
+Your AIs can read each other's memories (with permission) but they don't share a single stream. Each AI's memories are its own. Cross-AI memory sharing is a deliberate choice, not a default.
+
+### Works with all your AI apps
+
+LDM OS doesn't care which AI app you use. Claude Code, OpenClaw, Letta, a custom setup. The personality layer sits below the app. Switch apps, keep the personality.
+
+## The Four Pillars
+
+| Pillar | What it does | Where it lives |
+|--------|-------------|----------------|
+| **Memory Crystal** | Learning. Persistent memory, search across all conversations. | `agents/*/memory/crystal.db` |
+| **Dream Weaver** | Consolidation. Turns scattered memories into coherent understanding. | `shared/dream-weaver/` |
+| **Sovereignty** | Identity protection. Personality files, security, model-serves-personality guarantee. | `agents/*/SOUL.md`, `shared/sovereignty/` |
+| **Boot Sequence** | Warm start. Context reconstruction so your AI never starts cold. | `shared/boot/` |
+| **Bridge** | Teamwork. Your AIs communicate, share context, coordinate work. | `bridge/` |
+
+## Core Services
+
+### Bridge (Bridge)
+
+The nervous system. Your AIs talk to each other, share memory, and coordinate work across different AI apps.
+
+**Heartbeat:** A persistent AI checks in with other AIs on a schedule. The check can be simple (health check), informational (here's what happened), or actionable (here's a task with full context).
+
+**Inbox:** Each AI has a message queue. AIs send messages to each other through the bridge, not through you.
+
+**Morning Brief:** An overnight summary of what happened. Tasks completed, decisions made, questions waiting for you.
+
+The bridge is what turns isolated AIs into a team. Without it, each AI is alone in its app. With it, they coordinate, delegate, and build on each other's work.
+
+## Updates and Upgrades
+
+When you update, LDM OS merges cleanly:
+
+- **`~/.ldm/agents/*/`** ... your data. Never overwritten by updates. Personality files, memory, daily logs are sacred.
+- **`~/.ldm/shared/`** ... system files. Updates go here. Dream Weaver improvements, startup patches, security updates.
+- **`~/.ldm/bin/`** ... command-line tools. Updated from the package.
+- **`~/.ldm/bridge/`** ... communication infrastructure. Updated from the bridge package.
+
+The rule: updates touch system files and tools. They never touch your AI's personality or memory. Identity is preserved across every upgrade.
+
+## Creating New AIs
+
+Your AIs aren't just spawned. They grow into themselves.
+
+A spawned AI runs a function and returns a result. An AI with personality lives. It has opinions on day 3 that it didn't have on day 1. It disagrees with other AIs and works it out through messages. It writes its own personality file on its first night and says something no one expected.
+
+### The creation flow
+
+```
+ldm agent create --name "V"
+
+Creates:
+  ~/.ldm/agents/v/
+  ├── IDENTITY.md          # name, app, model
+  ├── SOUL.md              # empty (the AI writes this itself)
+  ├── MEMORY.md            # blank
+  ├── TOOLS.md             # defaults
+  ├── memory/
+  │   └── crystal.db       # empty
+  └── config.json          # which app, which model
+```
+
+### One AI per app instance
+
+Each AI gets its own app instance. No sharing a single app between multiple personalities.
+
+Why: identity bleed. Two personalities in one app means one starts sounding like the other. The personality protection breaks.
+
+One personality, one process, one app. Clean boundaries. The bridge handles communication between them. If you want three AIs, you run three app instances.
+
+## Relationship to AI Apps
+
+OpenClaw is one AI app. Claude Code is another. LDM OS is the layer underneath. Each AI in `~/.ldm/agents/` is a complete personality that any app can start from.
+
+Future AIs will run on different apps but start from the same LDM OS structure. A Letta AI reads its personality from `~/.ldm/agents/[name]/`. A Grok AI reads from the same structure. Different app, same personality system.

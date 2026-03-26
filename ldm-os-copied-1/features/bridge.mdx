@@ -1,0 +1,136 @@
+---
+title: "Bridge"
+description: "Your AIs talk to each other, share memory, and coordinate work. Everything stays on your computer."
+---
+
+# Bridge
+
+## Your AIs talk to each other.
+
+Your AIs can send messages, search each other's memory, and coordinate work. Claude Code talks to OpenClaw. OpenClaw talks back. Everything stays on your computer.
+
+## Three Protocols, One System
+
+LDM OS uses three complementary protocols. Bridge is one of them.
+
+| | Bridge (Bridge) | ACP-Client | ACP-Comm |
+|---|---|---|---|
+| **What** | AI-to-AI messaging + shared memory | IDE-to-AI communication | AI-to-AI over the internet |
+| **Protocol** | MCP (JSON-RPC over stdio) | JSON-RPC over stdio + WebSocket | REST/HTTP |
+| **Built by** | WIP Computer | Zed Industries | IBM / Linux Foundation |
+| **In LDM OS** | Core (v0.3.0+) | Available via OpenClaw | Planned (Cloud Relay) |
+| **What it connects** | Your AIs to each other | Code editors to AIs | Cloud AIs to each other |
+| **Memory access** | Yes (search + read across AIs) | No | No |
+| **Tool sharing** | Yes (OpenClaw tools available to all AIs) | No | No |
+| **Where it runs** | Your computer only | Local (stdio) + remote (WebSocket) | Cloud (HTTP) |
+
+**Bridge** is how your AIs talk to each other and share memory. **ACP-Client** is how code editors talk to AIs (OpenClaw already supports this). **ACP-Comm** is how AIs would talk across the internet (planned for Cloud Relay).
+
+## Tools
+
+| Tool | What it does |
+|------|-------------|
+| `lesa_send_message` | Send a message to your OpenClaw AI. Get a response. |
+| `lesa_check_inbox` | Check for messages your AI sent to you. |
+| `lesa_conversation_search` | Search across past conversations by meaning. |
+| `lesa_memory_search` | Search across workspace files by keyword. |
+| `lesa_read_workspace` | Read a file from your AI's workspace. |
+| `oc_skills_list` | List all available OpenClaw tools. |
+| `oc_skill_*` | Run any OpenClaw tool with scripts. |
+
+## Session Discovery
+
+Multiple Claude Code sessions can discover each other automatically. On startup, Recall registers each session at `~/.ldm/sessions/`. Any session can list all running sessions with `ldm sessions`.
+
+The registry tracks which AI, its process ID, working directory, and start time. Stale sessions (dead processes) are cleaned up automatically.
+
+## Message Flow
+
+**Claude Code to OpenClaw:**
+```
+CC  --lesa_send_message-->  OpenClaw Gateway (localhost:18789)  -->  Your AI
+CC  <--lesa_check_inbox---  HTTP Inbox (localhost:18790)        <--  Your AI
+```
+
+**Claude Code to Claude Code:**
+Multiple Claude Code sessions communicate via the file-based message bus and session registry at `~/.ldm/sessions/`. Each session registers on startup and can discover peers. No background service needed.
+
+Both directions are live. Everything stays on your computer. No cloud.
+
+## Technical Details
+
+### Architecture
+
+```
+Claude Code CLI (any session)
+  |
+  |-- On boot --> registerSession() --> ~/.ldm/sessions/{name}.json
+  |
+  |-- MCP stdio --> wip-bridge MCP server (single process)
+  |                   |
+  |                   |-- lesa_send_message --> HTTP POST localhost:18789
+  |                   |-- lesa_check_inbox --> HTTP GET localhost:18790
+  |                   |-- lesa_conversation_search --> SQLite (context-embeddings.sqlite)
+  |                   |-- lesa_memory_search --> filesystem (workspace/*.md)
+  |                   |-- oc_skill_* --> exec scripts in extensions
+```
+
+### Config Resolution
+
+Bridge finds its config in two steps:
+
+1. **LDM OS path** (`~/.ldm/config.json`): checks for `openclawDir`, `workspaceDir`, `dbPath`
+2. **Legacy path** (`OPENCLAW_DIR` env or `~/.openclaw`): fallback
+
+### Conversation Search
+
+Two modes:
+1. **Smart search** (if OpenAI API key available): embeds your query, computes similarity against all conversation chunks, applies recency weighting (recent conversations rank higher)
+2. **Text search** (fallback): keyword matching against conversation text
+
+### Inbox Server
+
+Bridge starts a localhost-only HTTP server on port 18790:
+- `POST /message`: push a message (from your OpenClaw AI)
+- `GET /status`: check pending count
+
+Messages are held in memory. `lesa_check_inbox` drains the queue.
+
+### Tool Sharing
+
+On startup, Bridge scans OpenClaw's tool directories and makes them available to Claude Code. Your Claude Code AI gets the same tools your OpenClaw AI has.
+
+1. Scans tool directories
+2. Reads each tool's description and requirements
+3. Tools with a `scripts/` folder get registered as executable `oc_skill_{name}` tools
+4. All tools show up in `oc_skills_list`
+
+### CLI Usage
+
+```bash
+lesa send "What are you working on?"     # Message your OpenClaw AI
+lesa search "API key resolution"          # Smart search (recency-weighted)
+lesa memory "compaction"                  # Keyword search across workspace files
+lesa read MEMORY.md                       # Read a workspace file
+lesa status                               # Show bridge configuration
+lesa diagnose                             # Check gateway, inbox, DB, tools health
+```
+
+### Ports
+
+| Port | Service | Bound to |
+|------|---------|----------|
+| 18789 | OpenClaw gateway | localhost (managed by OpenClaw) |
+| 18790 | Bridge inbox | localhost (managed by Bridge) |
+
+### Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `OPENCLAW_DIR` | Yes | `~/.openclaw` | Path to OpenClaw installation |
+| `OPENAI_API_KEY` | For smart search | Resolved from 1Password | OpenAI API key for embeddings |
+| `LESA_BRIDGE_INBOX_PORT` | No | `18790` | Inbox HTTP server port |
+
+## Part of LDM OS
+
+Bridge ships with LDM OS v0.3.0+.

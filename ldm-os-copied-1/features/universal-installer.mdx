@@ -1,0 +1,151 @@
+---
+title: "Universal Installer"
+description: "Point any tool at any AI running LDM OS, and it automatically makes that tool work with all your AIs."
+---
+
+# Universal Installer
+
+## Here's how software works in 2026.
+
+Most software is built for humans. GUIs, dashboards, web apps. Humans click buttons, fill forms, read screens.
+
+But the users are changing. Your AIs are the new users. They don't click. They call functions. They read instructions. They compose tools together. They need a **universal interface** ... multiple ways into the same logic, native to however they work.
+
+Software built for humans doesn't work for AIs. And software built only for AIs doesn't work for humans. You need both.
+
+`ldm install` gives all your tools this universal interface, and teaches your AI how to do it too.
+
+## The Karpathy Argument
+
+Andrej Karpathy put it clearly:
+
+> "I think the app store, the move to mobile, the concept of an app ... is an increasingly outdated concept. What matters are sensors and actuators. Sensors are things that convert physical state into digital state. Actuators are things that convert digital intent into physical change."
+>
+> "All LLMs care about are tools and the tools fall into this sensor/actuator divide. Software shouldn't be built into apps, but into small bespoke tools. Apps are for people. Tools are for LLMs, and increasingly, LLMs are the ones using software."
+
+[Source](https://x.com/karpathy/status/2024583544157458452)
+
+This is the future of software. Not apps. Tools. Sensors and actuators that your AIs compose together.
+
+## Sensors and Actuators
+
+**Sensors** turn the world into data:
+- Search the web
+- Search X/Twitter
+- Fetch a post
+- Read bookmarks
+- Check system health
+
+**Actuators** turn intent into action:
+- Generate an image
+- Post a tweet
+- Protect a file from edits
+- Generate a video
+
+## The Seven Ways a Tool Can Work
+
+Every tool should offer multiple ways in to the same core logic:
+
+| Way In | What it is | Who uses it |
+|--------|-----------|-------------|
+| **CLI** | Shell command | You and any AI with a terminal |
+| **Module** | Code import | Other tools, scripts |
+| **Connection Point** | JSON-RPC over stdio | Claude Code, Cursor, any MCP-compatible AI |
+| **Background Integration** | Lifecycle hooks + tools | OpenClaw AIs |
+| **Skill** | Written instructions (SKILL.md) | Any AI that reads files |
+| **Automation Hook** | Events before/after actions | Claude Code |
+| **App Package** | Distributable bundle (skills, hooks, connections) | Claude Code marketplace |
+
+Not every tool needs all seven. Build what makes sense. But the more ways you offer, the more AIs can use your tool.
+
+## How to Build It
+
+The structure is simple. Four files:
+
+```
+your-tool/
+  core.mjs            # pure logic, zero deps if possible
+  cli.mjs             # thin CLI wrapper
+  mcp-server.mjs      # MCP server wrapping core as tools
+  SKILL.md            # when/how to use it, for AIs
+```
+
+`core.mjs` does the work. Everything else is a thin wrapper. CLI parses arguments and calls core. The connection point maps tools to core functions. SKILL.md teaches AIs when to call what.
+
+One codebase, one set of tests, multiple ways in.
+
+## The Installer
+
+`ldm install` scans any tool, detects which interfaces exist, and installs them all. One command.
+
+```bash
+ldm install wipcomputer/wip-grok      # from GitHub
+ldm install /path/to/repo             # from a local path
+ldm install --dry-run                  # detect only
+ldm install                            # update all
+```
+
+### What It Detects
+
+| Pattern | Type | Install action |
+|---------|------|---------------|
+| `package.json` with `bin` | CLI | `npm install -g` |
+| `main` or `exports` in `package.json` | Module | Reports import path |
+| `mcp-server.mjs` | Connection Point | Adds to `.mcp.json` config |
+| `openclaw.plugin.json` | Background Integration | Copies to `~/.openclaw/extensions/` |
+| `SKILL.md` | Skill | Reports path |
+| `guard.mjs` or `claudeCode.hook` | Automation Hook | Adds to `~/.claude/settings.json` |
+| `.claude-plugin/plugin.json` | App Package | Registers with Claude Code marketplace |
+
+## Install Prompt Template
+
+Every tool gets an install prompt. Paste it into any AI. Your AI reads the spec, explains it, checks what's installed, and walks you through a dry run.
+
+```
+Read wip.computer/install/{URL}
+
+Then explain:
+1. What is {name of product}?
+2. What does it install on my system?
+3. What changes for us? (this AI)
+4. What changes across all my AIs?
+
+Check if {name of product} is already installed.
+
+If it is, show me what I have and what's new.
+
+Then ask:
+- Do you have questions?
+- Want to see a dry run?
+
+If I say yes, run: {product-init} init --dry-run
+
+Show me exactly what will change. Don't install anything until I say "install".
+```
+
+## Works With All Your AI Apps
+
+Works with any AI that can run shell commands:
+
+| AI App | How |
+|--------|-----|
+| Claude Code | CLI via bash, hooks via settings.json, connections via .mcp.json, packages via marketplace |
+| OpenAI Codex CLI | CLI via bash, skills via AGENTS.md |
+| Cursor | CLI via terminal, connections via config |
+| Windsurf | CLI via terminal, connections via config |
+| OpenClaw | Background integrations, skills, connections |
+| Any AI | CLI works everywhere. If it has a terminal, it works. |
+
+## Examples
+
+| Tool | Type | Interfaces | What it does |
+|------|------|------------|-------------|
+| [wip-grok](https://github.com/wipcomputer/wip-grok) | Sensor + Actuator | CLI + Module + Connection + Skill | xAI Grok API: search web/X, generate images/video |
+| [wip-x](https://github.com/wipcomputer/wip-x) | Sensor + Actuator | CLI + Module + Connection + Skill | X Platform API: read/write tweets, bookmarks |
+| [wip-file-guard](https://github.com/wipcomputer/wip-ai-devops-toolbox/tree/main/tools/wip-file-guard) | Actuator | CLI + Background + Hook | Protect files from AI edits |
+| [wip-healthcheck](https://github.com/wipcomputer/wip-healthcheck) | Sensor | CLI + Module | System health monitoring |
+| [wip-markdown-viewer](https://github.com/wipcomputer/wip-markdown-viewer) | Actuator | CLI + Module | Live markdown viewer |
+
+## Part of LDM OS
+
+Universal Installer ships with LDM OS. Run `ldm install` to use it.

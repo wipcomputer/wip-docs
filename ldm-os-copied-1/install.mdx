@@ -1,0 +1,102 @@
+---
+title: "Install LDM OS"
+description: "Install LDM OS to give all your AIs shared memory, personality, and tools. One command, one folder, every AI."
+---
+
+# Install LDM OS
+
+## All your AIs. One system.
+
+You use Claude Code, GPT, OpenClaw, and others. They don't share memory. They don't know each other. They can't work together.
+
+LDM OS connects them. Install it once and every AI you use gets:
+
+- **Personality** ... each AI gets its own behavior, voice, and skills
+- **Memory** ... shared memory across all your AIs, private and portable
+- **Ownership** ... every conversation, every memory, across every AI is yours. Take it anywhere.
+- **Teamwork** ... your AIs communicate, share tools, and collaborate
+- **Compatibility** ... any tool works with all your AIs. Install once, use everywhere.
+- **Payments** ... your AI hits a paywall, you approve it with Face ID. Apple Pay for your AIs.
+
+## Quick Start
+
+Open your AI and paste this:
+
+```
+Read https://wip.computer/install/wip-ldm-os.txt
+
+Check if LDM OS is already installed. If it is, run ldm install --dry-run and show me what I have and what's new.
+
+If not, walk me through setup and explain:
+
+1. What is LDM OS?
+2. What does it install on my system?
+3. What changes for us? (this AI)
+4. What changes across all my AIs?
+
+Then ask:
+- Do you have questions?
+- Want to see a dry run?
+
+If I say yes: Install the CLI first (npm install -g @wipcomputer/wip-ldm-os) and then run ldm install --dry-run.
+
+Show me exactly what will change. Don't install anything until I say "install".
+```
+
+Your AI reads the spec, checks what you have, and walks you through a dry run before touching anything.
+
+## What does it install?
+
+LDM OS creates a single folder at `~/.ldm/`:
+
+| Folder | What's inside |
+|--------|--------------|
+| `~/.ldm/extensions/` | Your installed tools |
+| `~/.ldm/agents/` | Each AI gets its own personality, memory, and journals here |
+| `~/.ldm/memory/` | Shared memory across all your AIs (including Memory Crystal) |
+| `~/.ldm/state/` | Configuration and sync state |
+| `~/.ldm/shared/rules/` | Your rules and conventions, deployed to every AI app |
+
+## What changes for this AI?
+
+- On startup, your AI reads its personality and memory from `~/.ldm/agents/`
+- Your rules are synced to your AI app automatically
+- Tools like Memory Crystal are managed from one place
+- After every conversation, memories are saved automatically
+
+## What changes across all my AIs?
+
+- Shared memory accessible to every AI you use
+- Same rules everywhere (consistency without repetition)
+- Shared tools (install once, every AI sees it)
+- Each AI keeps its own personality while sharing the same foundation
+
+## Manual Install
+
+If you prefer to install manually instead of using the AI-guided prompt:
+
+```bash
+# Install the CLI
+npm install -g @wipcomputer/wip-ldm-os
+
+# Set up the shared home
+ldm init
+
+# Preview what will be installed
+ldm install --dry-run
+
+# Install everything
+ldm install
+```
+
+## Verify Installation
+
+After installing, check that everything is working:
+
+```bash
+# Check system health
+ldm doctor
+
+# Show installed tools
+ldm status
+```

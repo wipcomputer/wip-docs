@@ -1,0 +1,77 @@
+---
+title: "System Pulse"
+description: "Is everything working? What's installed? What needs fixing? A complete picture of your AI setup in seconds."
+---
+
+# System Pulse
+
+## Is everything working?
+
+System Pulse tells you the state of your entire AI setup in seconds. What's installed, what's running, what needs attention.
+
+## Commands
+
+### ldm doctor
+
+Checks for problems across everything. Missing files, broken settings, outdated versions, failed connections. It tells you what's wrong and how to fix it.
+
+**What it checks:**
+
+1. `~/.ldm/` exists
+2. `version.json` is valid and version matches the CLI
+3. Full system scan (tools, connections, CLIs)
+4. Reconciliation (what's registered vs what's actually installed)
+5. Protected folders exist (memory/, agents/, state/, sessions/, messages/)
+6. Claude Code hooks are configured (checks for stale paths)
+7. Connection points are registered
+8. CLI tools are available on PATH
+
+**With `--fix`:**
+- Removes stale registry entries (registered but not actually installed)
+- Removes broken hook paths from settings files
+
+### ldm status
+
+Shows the full picture. Every tool installed, its version, whether it's healthy. Quick overview: version, install date, tool count, tool list with versions.
+
+### ldm updates
+
+Shows cached update check results. Use `--check` to re-scan npm for newer versions of your installed tools.
+
+## What It Checks
+
+- Shared Workspace exists and has the right structure
+- All installed tools are present and configured
+- Memory Crystal database is accessible
+- Tools are deployed and up to date
+- Startup files are in place
+- AI personality files exist for each configured AI
+
+## Reconciliation
+
+System Pulse compares all sources and determines status:
+
+| Status | Meaning |
+|--------|---------|
+| `healthy` | Registered + deployed + source available |
+| `installed-unlinked` | Registered + deployed, no source repo |
+| `registered-missing` | In registry but not deployed |
+| `deployed-unregistered` | Deployed but not in registry |
+| `mcp-only` | Connection point without LDM management |
+
+## State Detection
+
+System Pulse scans your real system across multiple sources:
+
+| Source | What it finds |
+|--------|--------------|
+| `~/.claude.json` | Connection points (user scope) |
+| `~/.ldm/extensions/` | Deployed tools (LDM) |
+| `~/.openclaw/extensions/` | Deployed tools (OpenClaw) |
+| `~/.ldm/extensions/registry.json` | Registry metadata |
+| PATH | CLI tools (with 5s timeout per binary) |
+| `~/.openclaw/skills/` | Deployed skills |
+
+## Part of LDM OS
+
+System Pulse is included with LDM OS. Available after `ldm init`.

@@ -35,7 +35,7 @@
             "pages": [
               "index",
               {
-                "group": "How Things Work",
+                "group": "Guides",
                 "pages": [
                   "guides/how-install-works",
                   "guides/how-agents-work",
@@ -47,84 +47,120 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "LDM OS",
+            "pages": [
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "ldm-os-copied-1/introduction",
+                  "ldm-os-copied-1/install",
+                  "ldm-os-copied-1/architecture",
+                  "ldm-os-copied-1/commands",
+                  "ldm-os-copied-1/interfaces"
+                ]
+              },
+              {
+                "group": "Included Features",
+                "pages": [
+                  "ldm-os-copied-1/features/bridge",
+                  "ldm-os-copied-1/features/universal-installer",
+                  "ldm-os-copied-1/features/shared-workspace",
+                  "ldm-os-copied-1/features/system-pulse",
+                  "ldm-os-copied-1/features/recall",
+                  "ldm-os-copied-1/features/lume"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Skills and Apps",
+            "pages": [
+              {
+                "group": "Core",
+                "pages": [
+                  "skills/core/memory-crystal",
+                  "skills/core/devops-toolbox",
+                  "skills/core/dream-weaver"
+                ]
+              },
+              {
+                "group": "DevOps Tools",
+                "pages": [
+                  "skills/devops/release-pipeline",
+                  "skills/devops/deploy-public",
+                  "skills/devops/branch-guard",
+                  "skills/devops/file-guard",
+                  "skills/devops/license-guard",
+                  "skills/devops/license-hook",
+                  "skills/devops/repo-visibility",
+                  "skills/devops/repo-manifest",
+                  "skills/devops/repo-init",
+                  "skills/devops/readme-format",
+                  "skills/devops/post-merge-rename",
+                  "skills/devops/dev-guide",
+                  "skills/devops/universal-installer"
+                ]
+              },
+              {
+                "group": "Utilities & Apps",
+                "pages": [
+                  "skills/utilities/1password",
+                  "skills/utilities/markdown-viewer",
+                  "skills/utilities/healthcheck",
+                  "skills/apps/clvr"
+                ]
+              },
+              {
+                "group": "APIs",
+                "pages": [
+                  "skills/apis/xai-grok",
+                  "skills/apis/x-platform"
+                ]
+              }
+            ]
           }
         ]
       },
       {
-        "tab": "Guides"
+        "tab": "Guides",
+        "hidden": true
       },
       {
         "tab": "LDM OS",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "LDM OS",
             "pages": [
-              "ldm-os/introduction",
-              "ldm-os/install",
-              "ldm-os/architecture",
-              "ldm-os/commands",
-              "ldm-os/interfaces"
-            ]
-          },
-          {
-            "group": "Included Features",
-            "pages": [
-              "ldm-os/features/bridge",
-              "ldm-os/features/universal-installer",
-              "ldm-os/features/shared-workspace",
-              "ldm-os/features/system-pulse",
-              "ldm-os/features/recall",
-              "ldm-os/features/lume"
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "ldm-os/introduction",
+                  "ldm-os/install",
+                  "ldm-os/architecture",
+                  "ldm-os/commands",
+                  "ldm-os/interfaces"
+                ]
+              },
+              {
+                "group": "Included Features",
+                "pages": [
+                  "ldm-os/features/bridge",
+                  "ldm-os/features/universal-installer",
+                  "ldm-os/features/shared-workspace",
+                  "ldm-os/features/system-pulse",
+                  "ldm-os/features/recall",
+                  "ldm-os/features/lume"
+                ]
+              }
             ]
           }
         ]
       },
       {
         "tab": "Skills & Apps",
-        "groups": [
-          {
-            "group": "Core",
-            "pages": [
-              "skills/core/memory-crystal",
-              "skills/core/devops-toolbox",
-              "skills/core/dream-weaver"
-            ]
-          },
-          {
-            "group": "DevOps Tools",
-            "pages": [
-              "skills/devops/release-pipeline",
-              "skills/devops/deploy-public",
-              "skills/devops/branch-guard",
-              "skills/devops/file-guard",
-              "skills/devops/license-guard",
-              "skills/devops/license-hook",
-              "skills/devops/repo-visibility",
-              "skills/devops/repo-manifest",
-              "skills/devops/repo-init",
-              "skills/devops/readme-format",
-              "skills/devops/post-merge-rename",
-              "skills/devops/dev-guide",
-              "skills/devops/universal-installer"
-            ]
-          },
-          {
-            "group": "Utilities & Apps",
-            "pages": [
-              "skills/utilities/1password",
-              "skills/utilities/markdown-viewer",
-              "skills/utilities/healthcheck",
-              "skills/apps/clvr"
-            ]
-          },
-          {
-            "group": "APIs",
-            "pages": [
-              "skills/apis/xai-grok",
-              "skills/apis/x-platform"
-            ]
-          }
-        ]
+        "hidden": true
       }
     ]
   },

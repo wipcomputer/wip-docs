@@ -1,0 +1,86 @@
+---
+title: "How Tools Connect to Your AIs"
+description: "How LDM OS automatically detects and installs CLI tools, connections, integrations, and more from any repo."
+---
+
+# How Tools Connect to Your AIs
+
+When you run `ldm install`, it automatically figures out what a tool supports and installs everything for you. No manual configuration needed. Point it at a tool and it does the rest.
+
+## What Gets Detected
+
+| Type | How it's found | Where it goes |
+|------|---------------|--------------|
+| CLI | `package.json` has `bin` entries | `npm install -g` |
+| Connection Point | Has `mcp-server.mjs` or `mcp-server.js` | Registered with your AI apps |
+| Background Integration | Has `openclaw.plugin.json` | `~/.ldm/extensions/` + `~/.openclaw/extensions/` |
+| Skill | Has `SKILL.md` or `skills/` directory | `~/.openclaw/skills/` |
+| Automation Hook | Has `guard.mjs` or `claudeCode.hook` in package.json | `~/.claude/settings.json` |
+| Module | Has `main` or `exports` in package.json | Importable by other tools |
+
+## The Seven Ways a Tool Can Work
+
+Different AIs speak different languages. Some run commands. Some import code. Some use connections. Some read instructions. The beauty of this system is that every tool can offer multiple ways in to the same core logic:
+
+| Way In | What it is | Who uses it |
+|--------|-----------|-------------|
+| **CLI** | Shell command | You and any AI with a terminal |
+| **Module** | Code import | Other tools, scripts |
+| **Connection Point** | JSON-RPC over stdio | Claude Code, Cursor, any MCP-compatible AI |
+| **Background Integration** | Lifecycle hooks + tools | OpenClaw AIs |
+| **Skill** | Written instructions (SKILL.md) | Any AI that reads files |
+| **Automation Hook** | Events before/after actions | Claude Code |
+| **App Package** | Distributable bundle (skills, hooks, connections) | Claude Code marketplace |
+
+Not every tool needs all seven. Build what makes sense. But the more ways you offer, the more AIs can use your tool.
+
+## Catalog
+
+Tools are defined in `catalog.json` at the LDM OS root. Each entry has:
+
+```json
+{
+  "id": "memory-crystal",
+  "name": "Memory Crystal",
+  "description": "Persistent memory for your AI.",
+  "npm": "@wipcomputer/memory-crystal",
+  "repo": "wipcomputer/memory-crystal",
+  "registryMatches": ["memory-crystal"],
+  "cliMatches": ["crystal"],
+  "recommended": true,
+  "status": "stable"
+}
+```
+
+## Stacks
+
+Stacks group tools for team installs. Defined in `catalog.json`:
+
+```json
+{
+  "stacks": {
+    "core": {
+      "name": "WIP Core",
+      "components": ["memory-crystal", "wip-ai-devops-toolbox", "wip-1password", "wip-markdown-viewer"],
+      "mcpServers": []
+    },
+    "web": {
+      "name": "Web Development",
+      "components": [],
+      "mcpServers": [
+        { "name": "playwright", "command": "npx", "args": ["-y", "@playwright/mcp@latest"] }
+      ]
+    }
+  }
+}
+```
+
+Stacks are composable via the `includes` field.
+
+## Your Installed Tools
+
+`~/.ldm/extensions/registry.json` tracks what's installed, versions, paths, and enabled/disabled state. Updated after every install.
+
+## Process Monitor
+
+`process-monitor.sh` runs every 3 minutes. Cleans up stuck processes older than 30 seconds and removes stale lockfiles. Logs to `~/.ldm/logs/process-monitor.log`.

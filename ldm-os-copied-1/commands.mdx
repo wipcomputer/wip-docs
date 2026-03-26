@@ -1,0 +1,86 @@
+---
+title: "Commands"
+description: "CLI reference for LDM OS. All available commands for managing your AI setup."
+---
+
+# Commands
+
+LDM OS is managed through the `ldm` command. All commands support `--dry-run` (preview changes) and `--json` (machine-readable output).
+
+## Command Reference
+
+| Command | What it does |
+|---------|-------------|
+| `ldm init` | Create the `~/.ldm/` folder and initial setup |
+| `ldm install` | Update all your installed tools |
+| `ldm install <org/repo>` | Install from GitHub |
+| `ldm install <npm-package>` | Install from npm |
+| `ldm install <path>` | Install from a local folder |
+| `ldm install --dry-run` | Preview what would change |
+| `ldm doctor` | Check health of all tools, connections, and AI configurations |
+| `ldm doctor --fix` | Auto-fix stale entries and broken paths |
+| `ldm status` | Show version info and your installed tools |
+| `ldm updates` | Check for available updates without installing |
+| `ldm worktree add <branch>` | Create a worktree in `_worktrees/` |
+| `ldm worktree list` | Show active worktrees |
+| `ldm worktree remove <path>` | Remove a worktree |
+| `ldm worktree clean` | Clean up stale worktrees |
+| `ldm enable <tool>` | Enable a tool |
+| `ldm disable <tool>` | Disable a tool (stays installed but inactive) |
+| `ldm uninstall` | Remove LDM OS (optionally keep your memory and AI data) |
+| `ldm sessions` | List all active Claude Code sessions |
+| `ldm --version` | Show version |
+
+## ldm init
+
+Creates the `~/.ldm/` folder and writes `version.json`. Sets up agents/, extensions/, memory/, logs/, bin/, hooks/, state/, sessions/, shared/. Installs the startup hook and process monitor. Safe to run multiple times.
+
+## ldm install
+
+The one installer. Handles everything: CLI tools, connections, AI app integrations, and background tools.
+
+```bash
+ldm install                         # update all your installed tools
+ldm install wipcomputer/wip-grok    # install from GitHub
+ldm install @wipcomputer/memory-crystal  # install from npm
+ldm install /path/to/repo           # install from local folder
+ldm install --dry-run               # show what would change
+```
+
+**How it works:**
+
+1. **Self-update.** Checks npm for a newer version of itself. Updates first, then re-runs with new code.
+2. **System scan.** Reads your installed tools, checks AI app configurations, and finds CLI tools on PATH.
+3. **Catalog matching.** Compares your installed tools against the catalog. Supports partial name matching.
+4. **Version check.** Checks every installed tool against npm for newer versions.
+5. **Toolbox detection.** For bundled tools (one package with multiple sub-tools), reports updates under the parent name and updates all sub-tools together.
+6. **Cleanup.** Removes duplicate entries and stale references from your tool list.
+7. **Private repo redirect.** If given a private repo name, auto-redirects to the public version.
+8. **Staging.** Downloads to `~/.ldm/tmp/` (not system temp). Cleaned up after install.
+
+## ldm doctor
+
+Health check. Shows all your installed tools, connections, hooks, and AI configurations. Reports anything that needs attention.
+
+With `--fix`:
+- Removes stale entries (registered but not deployed)
+- Removes broken hook paths from settings files
+
+## ldm worktree
+
+Centralized worktree management for developers. Creates worktrees in `_worktrees/<repo>--<branch>/` instead of as repo siblings.
+
+```bash
+ldm worktree add cc-mini/fix-bug    # auto-detects repo, creates in _worktrees/
+ldm worktree list                    # show active worktrees
+ldm worktree remove <path>          # remove a worktree
+ldm worktree clean                   # prune stale worktrees
+```
+
+## Debug Mode
+
+Set `LDM_DEBUG=1` to enable debug output. The logger writes timestamped context to stderr.
+
+```bash
+LDM_DEBUG=1 ldm install --dry-run
+```
