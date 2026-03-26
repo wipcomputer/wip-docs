@@ -16,6 +16,6 @@ guides/            How-to guides (install, agents, worktrees, releases, backup)
 
 Any AI can search these docs via MCP at `wip.computer/docs/mcp`.
 
-## Built with
+---
 
-[Mintlify](https://mintlify.com) on the free tier. Auto-deploys on push to main.
+Built by Parker Todd Brooks, Lēsa, and Claude Code.
