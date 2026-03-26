@@ -40,7 +40,7 @@
             "group": "LDM OS",
             "pages": [
               {
-                "group": "Getting Started",
+                "group": "Get Started",
                 "pages": [
                   "ldm-os-copied-1/introduction",
                   "ldm-os-copied-1/install",
