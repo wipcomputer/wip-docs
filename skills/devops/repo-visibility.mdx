@@ -1,0 +1,44 @@
+---
+title: "Repo Visibility Guard"
+description: "Never accidentally expose a private repo."
+---
+
+# Repo Visibility Guard
+
+Never accidentally expose a private repo.
+
+You have private repos with internal plans, dev notes, and AI context. Making one public by accident exposes everything. There's no undo for that.
+
+Repo Visibility Guard blocks repos from going public unless they have a proper `-private` counterpart with all internal content separated out. The check runs before visibility changes and as a scheduled audit.
+
+## What It Does
+
+- Blocks repos from going public without a `-private` counterpart
+- Catches accidental exposure of internal plans and development context
+- Runs as both a pre-action check and a periodic audit
+- Covers your entire GitHub organization
+
+## Install
+
+```bash
+ldm install wipcomputer/wip-ai-devops-toolbox
+```
+
+## Usage
+
+```bash
+wip-repo-permissions check wipcomputer/memory-crystal    # check one repo
+wip-repo-permissions audit wipcomputer                   # audit the whole org
+```
+
+## How It Works
+
+Every repo that should be public needs a `-private` counterpart. The private repo is where you work. The public repo is the clean, publishable version. This guard enforces that pattern so internal content never leaks.
+
+## Interfaces
+
+CLI, Module, Connection, Background Integration, Skill, Automation Hook.
+
+## Part of LDM OS
+
+Repo Visibility Guard is part of [AI Code Toolbox](/skills/core/devops-toolbox), which installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os).

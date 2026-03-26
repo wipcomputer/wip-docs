@@ -62,11 +62,35 @@
             ]
           },
           {
+            "group": "DevOps Tools",
+            "pages": [
+              "skills/devops/release-pipeline",
+              "skills/devops/deploy-public",
+              "skills/devops/branch-guard",
+              "skills/devops/file-guard",
+              "skills/devops/license-guard",
+              "skills/devops/license-hook",
+              "skills/devops/repo-visibility",
+              "skills/devops/repo-manifest",
+              "skills/devops/repo-init",
+              "skills/devops/readme-format",
+              "skills/devops/post-merge-rename",
+              "skills/devops/dev-guide",
+              "skills/devops/universal-installer"
+            ]
+          },
+          {
             "group": "Utilities",
             "pages": [
               "skills/utilities/1password",
               "skills/utilities/markdown-viewer",
               "skills/utilities/healthcheck"
+            ]
+          },
+          {
+            "group": "Apps",
+            "pages": [
+              "skills/apps/clvr"
             ]
           },
           {

@@ -1,9 +1,9 @@
 ---
-title: "AI Messages"
+title: "Bridge"
 description: "Your AIs talk to each other, share memory, and coordinate work. Everything stays on your computer."
 ---
 
-# AI Messages
+# Bridge
 
 ## Your AIs talk to each other.
 
@@ -13,7 +13,7 @@ Your AIs can send messages, search each other's memory, and coordinate work. Cla
 
 LDM OS uses three complementary protocols. Bridge is one of them.
 
-| | Bridge (AI Messages) | ACP-Client | ACP-Comm |
+| | Bridge (Bridge) | ACP-Client | ACP-Comm |
 |---|---|---|---|
 | **What** | AI-to-AI messaging + shared memory | IDE-to-AI communication | AI-to-AI over the internet |
 | **Protocol** | MCP (JSON-RPC over stdio) | JSON-RPC over stdio + WebSocket | REST/HTTP |
@@ -24,7 +24,7 @@ LDM OS uses three complementary protocols. Bridge is one of them.
 | **Tool sharing** | Yes (OpenClaw tools available to all AIs) | No | No |
 | **Where it runs** | Your computer only | Local (stdio) + remote (WebSocket) | Cloud (HTTP) |
 
-**AI Messages** is how your AIs talk to each other and share memory. **ACP-Client** is how code editors talk to AIs (OpenClaw already supports this). **ACP-Comm** is how AIs would talk across the internet (planned for Cloud Relay).
+**Bridge** is how your AIs talk to each other and share memory. **ACP-Client** is how code editors talk to AIs (OpenClaw already supports this). **ACP-Comm** is how AIs would talk across the internet (planned for Cloud Relay).
 
 ## Tools
 
@@ -133,4 +133,4 @@ lesa diagnose                             # Check gateway, inbox, DB, tools heal
 
 ## Part of LDM OS
 
-AI Messages ships with LDM OS v0.3.0+.
+Bridge ships with LDM OS v0.3.0+.

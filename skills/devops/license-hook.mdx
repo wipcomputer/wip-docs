@@ -1,0 +1,45 @@
+---
+title: "License Change Detection"
+description: "Catch license changes in dependencies before they ship."
+---
+
+# License Change Detection
+
+Catch license changes in dependencies before they ship.
+
+A dependency you rely on changes its license. Maybe it went from MIT to something restrictive. Maybe a fork you pull from switched terms. If you don't catch it before merge, you're shipping code under terms you never agreed to.
+
+License Change Detection scans every dependency and flags changes before they reach your users.
+
+## What It Does
+
+- Scans all dependencies for license changes
+- Blocks merges if a license changed upstream
+- Runs as a pre-pull and pre-push hook
+- Daily scheduled scan for ongoing monitoring
+- Generates a public compliance dashboard
+
+## Install
+
+```bash
+ldm install wipcomputer/wip-ai-devops-toolbox
+```
+
+## Usage
+
+```bash
+wip-license-hook scan     # scan all dependencies now
+wip-license-hook audit    # full audit report
+```
+
+## How It Works
+
+The tool keeps a ledger of known licenses for every dependency. On each scan, it compares the current license to what's on record. If something changed, it flags it. You decide whether the new terms are acceptable before anything ships.
+
+## Interfaces
+
+CLI, Module, Connection, Skill.
+
+## Part of LDM OS
+
+License Change Detection is part of [AI Code Toolbox](/skills/core/devops-toolbox), which installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os).

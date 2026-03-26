@@ -1,0 +1,38 @@
+---
+title: "Identity File Protection"
+description: "Protects identity files. CLAUDE.md, SOUL.md, MEMORY.md can never be overwritten."
+---
+
+# Identity File Protection
+
+Protects identity files. CLAUDE.md, SOUL.md, MEMORY.md can never be overwritten.
+
+Some files define who your AI is. Its personality, its memory, its instructions. One careless `Write` command and all of that is gone. Replaced with whatever the AI thought should be there instead.
+
+File Guard makes that impossible. Protected files can be read and carefully edited, but never blown away entirely.
+
+## What It Does
+
+- Blocks `Write` on protected files (CLAUDE.md, SOUL.md, MEMORY.md, SHARED-CONTEXT.md)
+- Blocks `Edit` when it would remove more than 2 lines or replace more than 4 lines
+- Works as a background safety check on every file operation
+
+Your AI can still append to these files and make small edits. It just can't overwrite them.
+
+## Why This Matters
+
+These files are your AI's identity. They're built up over time through conversations, decisions, and shared experience. Losing them means starting over. File Guard makes sure that never happens by accident.
+
+## Install
+
+```bash
+ldm install wipcomputer/wip-ai-devops-toolbox
+```
+
+## Interfaces
+
+CLI, Module, Background Integration, Skill, Automation Hook.
+
+## Part of LDM OS
+
+Identity File Protection is part of [AI Code Toolbox](/skills/core/devops-toolbox), which installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os).
