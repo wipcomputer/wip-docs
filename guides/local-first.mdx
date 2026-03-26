@@ -1,30 +1,30 @@
 ---
 title: "Local-First Principle"
-description: "Every LDM OS tool must work fully on your machine without calling any external server."
+description: "Every LDM OS tool works fully on your machine without calling any external server. Your data stays yours."
 ---
 
 # Local-First Principle
 
 ## The Rule
 
-Every LDM OS tool must work fully on your machine without calling any external server. No accounts. No API keys. No cloud dependency. One command to install, one command to run.
+Every LDM OS tool works fully on your machine without calling any external server. No accounts. No API keys. No cloud dependency. One command to install, one command to run.
 
 ```
 npm install -g @wipcomputer/wip-ldm-os
 ldm init
 ```
 
-That gives you a complete working system. Memory, identity, extensions, backup. Local SQLite. Local files. Nothing phones home.
+That gives you a complete working system. Memory, personality, tools, backup. Local SQLite. Local files. Nothing phones home.
 
 ## The Test
 
-Can someone clone the repo, run one command, and have a complete working system without calling `wip.computer` or any other server?
+Can someone install the package, run one command, and have a complete working system without calling `wip.computer` or any other server?
 
 Today the answer is yes. It has to stay yes.
 
 ## The Relay Exception
 
-The Crystal relay is a hosted MCP server that gives iOS and macOS Claude Code (cloud-hosted) access to Memory Crystal. It exists because Apple's platform doesn't allow local MCP servers on mobile.
+The Crystal relay is a hosted service that gives iOS and cloud-hosted Claude Code access to Memory Crystal. It exists because Apple's platform doesn't allow local connections on mobile.
 
 The relay is:
 - **Self-hostable.** The code ships in the repo. You can run your own.
@@ -35,14 +35,14 @@ The relay is:
 
 ## Why This Matters
 
-The industry pattern: call an SDK wrapper "MIT open source" while keeping the engine proprietary behind a cloud API. Users think they're getting open source. They're getting a client for someone else's server.
+The industry pattern: call a cloud wrapper "MIT open source" while keeping the engine proprietary behind a cloud API. Users think they're getting open source. They're getting a client for someone else's server.
 
-Our position: if you can't run the whole system yourself, it's not open source. It's a marketing label on an SDK. We don't do that.
+Our position: if you can't run the whole system yourself, it's not open source. It's a marketing label on a client library. We don't do that.
 
 | Pattern | What it means | Our stance |
 |---------|--------------|------------|
-| Open core | Engine is proprietary. Clients are MIT. | Not OSS. |
-| Source available | You can read the code. You can't run it without their infra. | Not OSS. |
+| Open core | Engine is proprietary. Clients are MIT. | Not truly open. |
+| Source available | You can read the code. You can't run it without their infra. | Not truly open. |
 | Local-first | Runs on your machine. Cloud is optional and self-hostable. | This is what we do. |
 
 ## For Contributors

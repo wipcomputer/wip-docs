@@ -1,33 +1,33 @@
 ---
 title: "How Backup Works"
-description: "Automated daily backups of all agent data, configs, and workspace files. Local and iCloud offsite."
+description: "Automated daily backups of all AI data, configs, and workspace files. Local and iCloud offsite."
 ---
 
 # How Backup Works
 
 ## One Script, One Place
 
-`~/.ldm/bin/ldm-backup.sh` runs daily at midnight via LDM Dev Tools.app. It backs up everything to `~/.ldm/backups/`, then tars it to iCloud for offsite.
+`~/.ldm/bin/ldm-backup.sh` runs daily at midnight via LDM Dev Tools.app. It backs up everything to `~/.ldm/backups/`, then compresses it to iCloud for offsite.
 
 ## What Gets Backed Up
 
 | Source | Method | What's in it |
 |--------|--------|-------------|
-| `~/.ldm/memory/crystal.db` | sqlite3 .backup | Irreplaceable memory (all agents) |
-| `~/.ldm/agents/` | cp -a | Identity files, journals, daily logs |
+| `~/.ldm/memory/crystal.db` | sqlite3 .backup | Your irreplaceable memories (all AIs) |
+| `~/.ldm/agents/` | cp -a | Personality files, journals, daily logs |
 | `~/.ldm/state/` | cp -a | Config, version, registry |
 | `~/.ldm/config.json` | cp | Workspace pointer, org |
-| `~/.openclaw/memory/main.sqlite` | sqlite3 .backup | OC conversations |
+| `~/.openclaw/memory/main.sqlite` | sqlite3 .backup | OpenClaw conversations |
 | `~/.openclaw/memory/context-embeddings.sqlite` | sqlite3 .backup | Embeddings |
 | `~/.openclaw/workspace/` | tar | Shared context, daily logs |
-| `~/.openclaw/agents/main/sessions/` | tar | OC session JSONL |
-| `~/.openclaw/openclaw.json` | cp | OC config |
-| `~/.claude/CLAUDE.md` | cp | CC instructions |
-| `~/.claude/settings.json` | cp | CC settings |
-| `~/.claude/projects/` | tar | CC auto-memory + transcripts |
+| `~/.openclaw/agents/main/sessions/` | tar | OpenClaw session JSONL |
+| `~/.openclaw/openclaw.json` | cp | OpenClaw config |
+| `~/.claude/CLAUDE.md` | cp | Claude Code instructions |
+| `~/.claude/settings.json` | cp | Claude Code settings |
+| `~/.claude/projects/` | tar | Claude Code auto-memory + transcripts |
 | Workspace directory | tar (excludes node_modules, .git/objects) | Entire workspace |
 
-**NOT backed up:** node_modules/, .git/objects/ (reconstructable), extensions (reinstallable), ~/.claude/cache.
+**NOT backed up:** node_modules/, .git/objects/ (reconstructable), tools (reinstallable), ~/.claude/cache.
 
 ## Backup Structure
 
@@ -69,8 +69,8 @@ After local backup, the entire dated folder is compressed and copied to iCloud. 
 ```bash
 ~/.ldm/bin/ldm-restore.sh                           # list available backups
 ~/.ldm/bin/ldm-restore.sh 2026-03-24--09-50-22      # restore everything
-~/.ldm/bin/ldm-restore.sh --only ldm <backup>       # restore only crystal.db + agents
-~/.ldm/bin/ldm-restore.sh --only openclaw <backup>  # restore only OC data
+~/.ldm/bin/ldm-restore.sh --only ldm <backup>       # restore only crystal.db + AI data
+~/.ldm/bin/ldm-restore.sh --only openclaw <backup>  # restore only OpenClaw data
 ~/.ldm/bin/ldm-restore.sh --from-icloud <file>      # restore from iCloud tar
 ~/.ldm/bin/ldm-restore.sh --dry-run <backup>        # preview
 ```
@@ -83,7 +83,7 @@ After restore: `openclaw gateway restart` then `crystal status` to verify.
 |------|------|-----|
 | Backup | Midnight | cron -> LDM Dev Tools.app -> ~/.ldm/bin/ldm-backup.sh |
 
-One cron entry. One script. One app. Verify is built into the script (exit code + log).
+One cron entry. One script. One app. Verification is built into the script (exit code + log).
 
 ## Config
 
