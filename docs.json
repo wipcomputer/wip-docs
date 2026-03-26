@@ -42,7 +42,7 @@
               {
                 "group": "Get Started",
                 "pages": [
-                  "ldm-os-copied-1/introduction",
+                  "ldm-os/introduction",
                   "ldm-os-copied-1/install",
                   "ldm-os-copied-1/architecture",
                   "ldm-os-copied-1/commands",
@@ -120,7 +120,7 @@
               {
                 "group": "Get Started",
                 "pages": [
-                  "ldm-os/introduction",
+                  "ldm-os/introduction1",
                   "ldm-os/install",
                   "ldm-os/architecture",
                   "ldm-os/commands",
