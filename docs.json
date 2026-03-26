@@ -15,7 +15,14 @@
     "tabs": [
       {
         "tab": "WIP Computer",
-        "href": "/"
+        "groups": [
+          {
+            "group": "",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
       },
       {
         "tab": "LDM OS",
