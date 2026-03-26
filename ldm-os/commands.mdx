@@ -1,0 +1,86 @@
+---
+title: "Commands"
+description: "CLI reference for LDM OS. All available commands for managing your AI infrastructure."
+---
+
+# Commands
+
+LDM OS is managed through the `ldm` CLI. All commands support `--dry-run` (preview changes) and `--json` (machine-readable output).
+
+## Command Reference
+
+| Command | What it does |
+|---------|-------------|
+| `ldm init` | Scaffold `~/.ldm/` and write version.json |
+| `ldm install` | Update all registered extensions + CLIs |
+| `ldm install <org/repo>` | Install from GitHub |
+| `ldm install <npm-package>` | Install from npm |
+| `ldm install <path>` | Install from local directory |
+| `ldm install --dry-run` | Show what would change |
+| `ldm doctor` | Check health of all extensions, MCP connections, hooks, CLIs, agents |
+| `ldm doctor --fix` | Auto-fix stale registry entries and hook paths |
+| `ldm status` | Show version info and extension list |
+| `ldm updates` | Check npm for available updates without installing |
+| `ldm worktree add <branch>` | Create a worktree in `_worktrees/` |
+| `ldm worktree list` | Show active worktrees |
+| `ldm worktree remove <path>` | Remove a worktree |
+| `ldm worktree clean` | Prune stale worktrees |
+| `ldm enable <ext>` | Enable an extension |
+| `ldm disable <ext>` | Disable an extension (stays installed but inactive) |
+| `ldm uninstall` | Remove LDM OS (optionally preserve memory and agent data) |
+| `ldm sessions` | List all active Claude Code sessions |
+| `ldm --version` | Show version |
+
+## ldm init
+
+Scaffold `~/.ldm/` and write `version.json`. Creates agents/, extensions/, memory/, logs/, bin/, hooks/, state/, sessions/, shared/. Installs the boot sequence hook and process monitor cron. Idempotent.
+
+## ldm install
+
+The one installer. Handles everything: CLI tools, extensions, MCP servers, Claude Code hooks, OpenClaw plugins, skills.
+
+```bash
+ldm install                         # update all registered extensions + CLIs
+ldm install wipcomputer/wip-grok    # install from GitHub
+ldm install @wipcomputer/memory-crystal  # install from npm
+ldm install /path/to/repo           # install from local directory
+ldm install --dry-run               # show what would change
+```
+
+**How it works:**
+
+1. **Self-update.** Checks npm for a newer `@wipcomputer/wip-ldm-os`. Updates itself first, then re-runs with new code.
+2. **System state detection.** Scans `~/.ldm/extensions/`, `~/.openclaw/extensions/`, Claude Code MCP config, and CLI binaries on PATH.
+3. **Catalog matching.** Matches installed extensions against `catalog.json` components. Supports partial ID match, name match, and registryMatches.
+4. **npm version check.** Checks every installed extension against npm for newer versions.
+5. **Parent package detection.** For toolbox-style repos (one npm package with multiple sub-tools), reports updates under the parent name and updates all sub-tools together.
+6. **Ghost cleanup.** Removes `-private` duplicates and stale prefixed entries from the registry.
+7. **Private repo redirect.** If given `org/name-private`, auto-redirects to the public repo.
+8. **Staging.** Clones to `~/.ldm/tmp/` (not `/tmp/`). Cleaned up after install.
+
+## ldm doctor
+
+Health check. Shows all installed extensions, MCP connections, Claude Code hooks, CLI binaries, agents. Reports issues.
+
+With `--fix`:
+- Removes stale registry entries (registered but not deployed)
+- Removes stale hook paths from `~/.claude/settings.json` (missing files, `/tmp/` paths)
+
+## ldm worktree
+
+Centralized worktree management. Creates worktrees in `_worktrees/<repo>--<branch>/` instead of as repo siblings.
+
+```bash
+ldm worktree add cc-mini/fix-bug    # auto-detects repo, creates in _worktrees/
+ldm worktree list                    # show active worktrees
+ldm worktree remove <path>          # remove a worktree
+ldm worktree clean                   # prune stale worktrees
+```
+
+## Debug Mode
+
+Set `LDM_DEBUG=1` to enable debug output. The logger writes timestamped context to stderr.
+
+```bash
+LDM_DEBUG=1 ldm install --dry-run
+```

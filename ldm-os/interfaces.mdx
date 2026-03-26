@@ -1,0 +1,86 @@
+---
+title: "Interface Detection"
+description: "How LDM OS automatically detects and installs CLI tools, MCP servers, plugins, skills, and hooks from any repo."
+---
+
+# Interface Detection
+
+When you run `ldm install`, it automatically detects what a repo supports and installs each interface accordingly. No manual configuration needed. Point it at a repo and it figures out the rest.
+
+## Detection Table
+
+| Interface | How it's detected | Where it deploys |
+|-----------|------------------|-----------------|
+| CLI | `package.json` has `bin` entries | `npm install -g` |
+| MCP Server | Has `mcp-server.mjs` or `mcp-server.js` | `claude mcp add --scope user` |
+| OpenClaw Plugin | Has `openclaw.plugin.json` | `~/.ldm/extensions/` + `~/.openclaw/extensions/` |
+| Skill | Has `SKILL.md` or `skills/` directory | `~/.openclaw/skills/` |
+| CC Hook | Has `guard.mjs` or `claudeCode.hook` in package.json | `~/.claude/settings.json` |
+| Module | Has `main` or `exports` in package.json | Importable via `node_modules` |
+
+## The Seven Interfaces
+
+Agents don't all speak the same language. Some run shell commands. Some import modules. Some talk MCP. Some read markdown instructions. The Universal Interface convention means every tool can expose multiple interfaces into the same core logic:
+
+| Interface | What | Who uses it |
+|-----------|------|-------------|
+| **CLI** | Shell command | Humans, any agent with bash |
+| **Module** | ES import | Other tools, scripts |
+| **MCP Server** | JSON-RPC over stdio | Claude Code, Cursor, any MCP client |
+| **OpenClaw Plugin** | Lifecycle hooks + tools | OpenClaw agents |
+| **Skill** | Markdown instructions (SKILL.md) | Any agent that reads files |
+| **Claude Code Hook** | PreToolUse/Stop events | Claude Code |
+| **Claude Code Plugin** | Distributable package (skills, agents, hooks, MCP, LSP) | Claude Code marketplace |
+
+Not every tool needs all seven. Build what makes sense. But the more interfaces you expose, the more agents can use your tool.
+
+## Catalog
+
+Skills are defined in `catalog.json` at the LDM OS root. Each entry has:
+
+```json
+{
+  "id": "memory-crystal",
+  "name": "Memory Crystal",
+  "description": "Persistent memory for your AI.",
+  "npm": "@wipcomputer/memory-crystal",
+  "repo": "wipcomputer/memory-crystal",
+  "registryMatches": ["memory-crystal"],
+  "cliMatches": ["crystal"],
+  "recommended": true,
+  "status": "stable"
+}
+```
+
+## Stacks
+
+Stacks group skills for team installs. Defined in `catalog.json`:
+
+```json
+{
+  "stacks": {
+    "core": {
+      "name": "WIP Core",
+      "components": ["memory-crystal", "wip-ai-devops-toolbox", "wip-1password", "wip-markdown-viewer"],
+      "mcpServers": []
+    },
+    "web": {
+      "name": "Web Development",
+      "components": [],
+      "mcpServers": [
+        { "name": "playwright", "command": "npx", "args": ["-y", "@playwright/mcp@latest"] }
+      ]
+    }
+  }
+}
+```
+
+Stacks are composable via the `includes` field.
+
+## Extension Registry
+
+`~/.ldm/extensions/registry.json` tracks what's installed, versions, paths, and enabled/disabled state. Updated after every install.
+
+## Process Monitor
+
+`process-monitor.sh` runs every 3 minutes via cron. Kills zombie npm/ldm processes older than 30 seconds. Cleans stale lockfiles. Logs to `~/.ldm/logs/process-monitor.log`.
