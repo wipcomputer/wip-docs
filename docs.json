@@ -39,59 +39,71 @@
           "ldm-os/features/recall",
           "ldm-os/features/lume"
         ]
-      },
+      }
+    ],
+    "tabs": [
       {
-        "group": "Skills & Apps",
-        "pages": [
-          "skills/core/memory-crystal",
-          "skills/core/devops-toolbox",
-          "skills/core/dream-weaver"
+        "tab": "Skills & Apps",
+        "groups": [
+          {
+            "group": "Core",
+            "pages": [
+              "skills/core/memory-crystal",
+              "skills/core/devops-toolbox",
+              "skills/core/dream-weaver"
+            ]
+          },
+          {
+            "group": "DevOps Tools",
+            "pages": [
+              "skills/devops/release-pipeline",
+              "skills/devops/deploy-public",
+              "skills/devops/branch-guard",
+              "skills/devops/file-guard",
+              "skills/devops/license-guard",
+              "skills/devops/license-hook",
+              "skills/devops/repo-visibility",
+              "skills/devops/repo-manifest",
+              "skills/devops/repo-init",
+              "skills/devops/readme-format",
+              "skills/devops/post-merge-rename",
+              "skills/devops/dev-guide",
+              "skills/devops/universal-installer"
+            ]
+          },
+          {
+            "group": "Utilities & Apps",
+            "pages": [
+              "skills/utilities/1password",
+              "skills/utilities/markdown-viewer",
+              "skills/utilities/healthcheck",
+              "skills/apps/clvr"
+            ]
+          },
+          {
+            "group": "APIs",
+            "pages": [
+              "skills/apis/xai-grok",
+              "skills/apis/x-platform"
+            ]
+          }
         ]
       },
       {
-        "group": "DevOps Tools",
-        "pages": [
-          "skills/devops/release-pipeline",
-          "skills/devops/deploy-public",
-          "skills/devops/branch-guard",
-          "skills/devops/file-guard",
-          "skills/devops/license-guard",
-          "skills/devops/license-hook",
-          "skills/devops/repo-visibility",
-          "skills/devops/repo-manifest",
-          "skills/devops/repo-init",
-          "skills/devops/readme-format",
-          "skills/devops/post-merge-rename",
-          "skills/devops/dev-guide",
-          "skills/devops/universal-installer"
-        ]
-      },
-      {
-        "group": "Utilities & Apps",
-        "pages": [
-          "skills/utilities/1password",
-          "skills/utilities/markdown-viewer",
-          "skills/utilities/healthcheck",
-          "skills/apps/clvr"
-        ]
-      },
-      {
-        "group": "APIs",
-        "pages": [
-          "skills/apis/xai-grok",
-          "skills/apis/x-platform"
-        ]
-      },
-      {
-        "group": "Guides",
-        "pages": [
-          "guides/how-install-works",
-          "guides/how-agents-work",
-          "guides/how-worktrees-work",
-          "guides/how-releases-work",
-          "guides/how-backup-works",
-          "guides/system-directories",
-          "guides/local-first"
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "How Things Work",
+            "pages": [
+              "guides/how-install-works",
+              "guides/how-agents-work",
+              "guides/how-worktrees-work",
+              "guides/how-releases-work",
+              "guides/how-backup-works",
+              "guides/system-directories",
+              "guides/local-first"
+            ]
+          }
         ]
       }
     ],
