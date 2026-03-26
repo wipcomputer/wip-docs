@@ -12,36 +12,44 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "groups": [
-      {
-        "group": "WIP Computer",
-        "pages": [
-          "index"
-        ]
-      },
-      {
-        "group": "LDM OS",
-        "pages": [
-          "ldm-os/introduction",
-          "ldm-os/install",
-          "ldm-os/architecture",
-          "ldm-os/commands",
-          "ldm-os/interfaces"
-        ]
-      },
-      {
-        "group": "Included Features",
-        "pages": [
-          "ldm-os/features/bridge",
-          "ldm-os/features/universal-installer",
-          "ldm-os/features/shared-workspace",
-          "ldm-os/features/system-pulse",
-          "ldm-os/features/recall",
-          "ldm-os/features/lume"
-        ]
-      }
-    ],
     "tabs": [
+      {
+        "tab": "WIP Computer",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "LDM OS",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "ldm-os/introduction",
+              "ldm-os/install",
+              "ldm-os/architecture",
+              "ldm-os/commands",
+              "ldm-os/interfaces"
+            ]
+          },
+          {
+            "group": "Included Features",
+            "pages": [
+              "ldm-os/features/bridge",
+              "ldm-os/features/universal-installer",
+              "ldm-os/features/shared-workspace",
+              "ldm-os/features/system-pulse",
+              "ldm-os/features/recall",
+              "ldm-os/features/lume"
+            ]
+          }
+        ]
+      },
       {
         "tab": "Skills & Apps",
         "groups": [
