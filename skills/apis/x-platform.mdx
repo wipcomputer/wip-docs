@@ -1,19 +1,19 @@
 ---
 title: "X Platform"
-description: "X Platform API. Read posts, search tweets, post, upload media. Built on the official xdk TypeScript SDK."
+description: "X Platform API. Read posts, search tweets, post updates, upload media. Built on the official xdk TypeScript SDK."
 ---
 
-# wip-xai-x
+# X Platform
 
-X Platform API. Read posts, search tweets, post, upload media.
+Read posts, search tweets, post updates, upload media.
 
 Built on the official [@xdevplatform/xdk](https://github.com/xdevplatform/xdk) TypeScript SDK (v0.4.0, MIT, zero transitive deps).
 
-Four interfaces: CLI, Module, MCP Server, Skill.
+Four interfaces: CLI, Module, Connection Point, Skill.
 
 ## Install
 
-Open your AI coding tool and say:
+Open your AI and say:
 
 ```
 Clone wipcomputer/wip-xai-x and read the README and SKILL.md.
@@ -25,7 +25,7 @@ Then explain to me:
 Then ask me if I have more questions, or if I want you to integrate it into our system.
 ```
 
-Your agent will read the repo, explain the tool, and walk you through integration interactively.
+Your AI will read the repo, explain the tool, and walk you through integration interactively.
 
 ### Authentication
 
@@ -91,7 +91,7 @@ const { data } = await post_tweet({ text: 'Hello from wip-xai-x' });
 console.log(`Posted: https://x.com/i/status/${data.id}`);
 ```
 
-### MCP Server
+### Connection Point
 
 Add to your `.mcp.json`:
 
@@ -149,4 +149,3 @@ Built on [@xdevplatform/xdk](https://github.com/xdevplatform/xdk) v0.4.0 (offici
 ## License
 
 MIT
-

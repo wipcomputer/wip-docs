@@ -1,26 +1,26 @@
 ---
 title: "Live Markdown Viewer"
-description: "Live markdown viewer for AI pair-editing. When you collaborate, the updates render instantly."
+description: "See your AI's edits live as it writes. Real-time markdown preview in your browser."
 ---
 
 # Live Markdown Viewer
 
-Live markdown viewer for AI pair-editing. When you collaborate, the updates render instantly. Works with any AI agent and web browser.
+See your AI's edits live as it writes. Real-time markdown preview in your browser. Works with any AI and any web browser.
 
 ## How It Works
 
-1. Tell your AI coding tool to install `@wipcomputer/markdown-viewer` globally
-2. Tell your AI to open the demo.md (or any .md) in md view
-3. AI will open the file in your default browser
+1. Tell your AI to install `@wipcomputer/markdown-viewer` globally
+2. Tell your AI to open any .md file in the viewer
+3. Your AI opens the file in your browser
 4. Every save re-renders the page instantly. No refresh needed.
 
 Open multiple tabs to work on multiple documents at once.
 
 ## Install
 
-### For AI Agents
+### For Your AI
 
-Open your AI coding tool and say:
+Open your AI and say:
 
 ```
 Install @wipcomputer/markdown-viewer globally,
@@ -46,20 +46,20 @@ mdview --port 8080             # Use custom port
 mdview --root /path/to/dir     # Restrict file access to this directory
 ```
 
-## Supported Tools
+## Works With All Your AIs
 
-This works with any AI agent that can run shell commands and edit files.
+This works with any AI that can run shell commands and edit files.
 
-| Tool | Instruction file | How to add support |
-|------|-----------------|-------------------|
+| AI App | Instruction file | How to add support |
+|--------|-----------------|-------------------|
 | Claude Code | `CLAUDE.md` | Add the snippet below to your project's `CLAUDE.md` |
 | OpenAI Codex CLI | `AGENTS.md` | Add the snippet below to your project's `AGENTS.md` |
 | Cursor | `.cursorrules` | Add the snippet below to `.cursorrules` |
 | Windsurf | `.windsurfrules` | Add the snippet below to `.windsurfrules` |
 | OpenClaw | `SKILL.md` | Install the `live-viewer` skill |
-| Any other agent | Whatever config it reads | Add the snippet below |
+| Any other AI | Whatever config it reads | Add the snippet below |
 
-If your tool reads a project-level instruction file ... it works. The snippet is the same for all of them.
+If your AI reads a project-level instruction file ... it works. The snippet is the same for all of them.
 
 ## Features
 
@@ -74,7 +74,7 @@ If your tool reads a project-level instruction file ... it works. The snippet is
 - **Drag and drop:** drop any .md file onto the homepage to view it
 - **Zero external requests:** all dependencies bundled locally, no CDN calls
 
-## For AI Agents
+## For Your AI
 
 When the user asks you to set up the live markdown viewer, follow these steps.
 
@@ -90,7 +90,7 @@ The server runs at `http://127.0.0.1:3000` and stays running in the background.
 
 ### Step 2. Add the Snippet to Your Project
 
-Add the following to whatever instruction file your tool uses:
+Add the following to whatever instruction file your AI uses:
 
 ```markdown
 ## Live Markdown Viewer
@@ -124,4 +124,3 @@ Do this every time you edit a markdown file.
 ## License
 
 MIT
-
