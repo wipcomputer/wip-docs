@@ -17,7 +17,7 @@
         "tab": "WIP Computer",
         "groups": [
           {
-            "group": "",
+            "group": "Overview",
             "pages": [
               "index"
             ]
