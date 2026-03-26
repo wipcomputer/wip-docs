@@ -195,5 +195,8 @@
       "x": "https://x.com/wipcomputer",
       "github": "https://github.com/wipcomputer"
     }
+  },
+  "metadata": {
+    "timestamp": true
   }
 }
