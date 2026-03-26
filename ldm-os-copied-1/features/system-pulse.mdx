@@ -1,13 +1,7 @@
 ---
 title: "System Pulse"
-description: "Is everything working? What's installed? What needs fixing? A complete picture of your AI setup in seconds."
+description: "System Pulse tells you the state of your entire AI setup in seconds. What's installed, what's running, what needs attention."
 ---
-
-# System Pulse
-
-## Is everything working?
-
-System Pulse tells you the state of your entire AI setup in seconds. What's installed, what's running, what needs attention.
 
 ## Commands
 
@@ -27,6 +21,7 @@ Checks for problems across everything. Missing files, broken settings, outdated 
 8. CLI tools are available on PATH
 
 **With `--fix`:**
+
 - Removes stale registry entries (registered but not actually installed)
 - Removes broken hook paths from settings files
 
@@ -52,9 +47,9 @@ Shows cached update check results. Use `--check` to re-scan npm for newer versio
 System Pulse compares all sources and determines status:
 
 | Status | Meaning |
-|--------|---------|
-| `healthy` | Registered + deployed + source available |
-| `installed-unlinked` | Registered + deployed, no source repo |
+| --- | --- |
+| `healthy` | Registered \+ deployed \+ source available |
+| `installed-unlinked` | Registered \+ deployed, no source repo |
 | `registered-missing` | In registry but not deployed |
 | `deployed-unregistered` | Deployed but not in registry |
 | `mcp-only` | Connection point without LDM management |
@@ -64,7 +59,7 @@ System Pulse compares all sources and determines status:
 System Pulse scans your real system across multiple sources:
 
 | Source | What it finds |
-|--------|--------------|
+| --- | --- |
 | `~/.claude.json` | Connection points (user scope) |
 | `~/.ldm/extensions/` | Deployed tools (LDM) |
 | `~/.openclaw/extensions/` | Deployed tools (OpenClaw) |

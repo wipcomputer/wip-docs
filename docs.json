@@ -33,19 +33,7 @@
           {
             "group": "Overview",
             "pages": [
-              "index",
-              {
-                "group": "Guides",
-                "pages": [
-                  "guides/how-install-works",
-                  "guides/how-agents-work",
-                  "guides/how-worktrees-work",
-                  "guides/how-releases-work",
-                  "guides/how-backup-works",
-                  "guides/system-directories",
-                  "guides/local-first"
-                ]
-              }
+              "index"
             ]
           },
           {
@@ -62,7 +50,7 @@
                 ]
               },
               {
-                "group": "Included Features",
+                "group": "Features",
                 "pages": [
                   "ldm-os-copied-1/features/bridge",
                   "ldm-os-copied-1/features/universal-installer",
@@ -124,10 +112,6 @@
         ]
       },
       {
-        "tab": "Guides",
-        "hidden": true
-      },
-      {
         "tab": "LDM OS",
         "groups": [
           {
@@ -154,6 +138,24 @@
                   "ldm-os/features/lume"
                 ]
               }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "hidden": true,
+        "pages": [
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/how-install-works",
+              "guides/how-agents-work",
+              "guides/how-worktrees-work",
+              "guides/how-releases-work",
+              "guides/how-backup-works",
+              "guides/system-directories",
+              "guides/local-first"
             ]
           }
         ]
