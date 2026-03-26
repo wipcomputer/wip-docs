@@ -1,0 +1,128 @@
+---
+title: "Live Markdown Viewer"
+description: "Live markdown viewer for AI pair-editing. When you collaborate, the updates render instantly."
+---
+
+# Live Markdown Viewer
+
+Live markdown viewer for AI pair-editing. When you collaborate, the updates render instantly. Works with any AI agent and web browser.
+
+## How It Works
+
+1. Tell your AI coding tool to install `@wipcomputer/markdown-viewer` globally
+2. Tell your AI to open the demo.md (or any .md) in md view
+3. AI will open the file in your default browser
+4. Every save re-renders the page instantly. No refresh needed.
+
+Open multiple tabs to work on multiple documents at once.
+
+## Install
+
+### For AI Agents
+
+Open your AI coding tool and say:
+
+```
+Install @wipcomputer/markdown-viewer globally,
+start mdview, and add live viewer support to this project.
+```
+
+Your AI will install the package, start the server, and add the right instructions to your project so it knows to open the viewer whenever you edit markdown together. That's it.
+
+### npm
+
+```bash
+npm install -g @wipcomputer/markdown-viewer
+mdview
+```
+
+Global install gives you the `mdview` command anywhere.
+
+### Options
+
+```bash
+mdview                         # Start server on port 3000
+mdview --port 8080             # Use custom port
+mdview --root /path/to/dir     # Restrict file access to this directory
+```
+
+## Supported Tools
+
+This works with any AI agent that can run shell commands and edit files.
+
+| Tool | Instruction file | How to add support |
+|------|-----------------|-------------------|
+| Claude Code | `CLAUDE.md` | Add the snippet below to your project's `CLAUDE.md` |
+| OpenAI Codex CLI | `AGENTS.md` | Add the snippet below to your project's `AGENTS.md` |
+| Cursor | `.cursorrules` | Add the snippet below to `.cursorrules` |
+| Windsurf | `.windsurfrules` | Add the snippet below to `.windsurfrules` |
+| OpenClaw | `SKILL.md` | Install the `live-viewer` skill |
+| Any other agent | Whatever config it reads | Add the snippet below |
+
+If your tool reads a project-level instruction file ... it works. The snippet is the same for all of them.
+
+## Features
+
+- **Live reload:** SSE-powered, works in all browsers including Safari
+- **Multi-file:** each tab watches its own file independently
+- **GitHub Flavored Markdown:** tables, task lists, strikethrough
+- **Syntax highlighting:** 180+ languages via highlight.js
+- **Dark mode:** light and dark themes
+- **Table of contents:** auto-generated from headings
+- **Mermaid diagrams:** flowcharts, sequence diagrams, and more
+- **Math equations:** KaTeX rendering for LaTeX
+- **Drag and drop:** drop any .md file onto the homepage to view it
+- **Zero external requests:** all dependencies bundled locally, no CDN calls
+
+## For AI Agents
+
+When the user asks you to set up the live markdown viewer, follow these steps.
+
+### Step 1. Start the Server
+
+If installed globally:
+
+```bash
+curl -s http://127.0.0.1:3000/ > /dev/null 2>&1 || mdview &
+```
+
+The server runs at `http://127.0.0.1:3000` and stays running in the background.
+
+### Step 2. Add the Snippet to Your Project
+
+Add the following to whatever instruction file your tool uses:
+
+```markdown
+## Live Markdown Viewer
+
+When editing a .md file, check the server is running and open it in the viewer:
+
+  curl -s http://127.0.0.1:3000/ > /dev/null 2>&1 || mdview &
+  open "http://127.0.0.1:3000/view?path={absolute path to the file}"
+
+Then make your edits. The user sees every change as you write. No refresh needed.
+Do this every time you edit a markdown file.
+```
+
+### Step 3. Every Time You Edit Markdown
+
+1. Run: `open "http://127.0.0.1:3000/view?path={absolute path to the file}"`
+2. Edit the file
+3. The user sees it update live in their browser
+
+## Security
+
+- Server binds to `127.0.0.1` only. It is not accessible from other machines.
+- Use `--root` to restrict file access to a specific directory tree.
+
+## Troubleshooting
+
+**Page shows the index instead of my file:** The `--root` flag restricts which files can be viewed. Restart without `--root` to allow any path.
+
+**Safari shows a blank page or stalls:** Safari aggressively caches SSE connections. Hard refresh with Cmd+Shift+R, or restart the server.
+
+## License
+
+MIT
+
+Built by Parker Todd Brooks, with Claude Code and Lesa (OpenClaw).

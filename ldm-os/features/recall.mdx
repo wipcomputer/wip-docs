@@ -1,0 +1,70 @@
+---
+title: "Recall"
+description: "Every session, your AI starts with full context. Identity, memory, tools, what happened yesterday. No blank slates. No repeating yourself."
+---
+
+# Recall
+
+## No blank slates.
+
+Every time your AI starts a session, Recall loads everything it needs to know. Identity, memory, tools, what happened yesterday. Your AI picks up where it left off instead of starting from zero.
+
+## How It Works
+
+When a session begins, LDM OS reads a sequence of files and feeds them to your AI before you say anything:
+
+1. **Identity** ... who this AI is, how it behaves, its values
+2. **Shared context** ... what's happening right now across all your AIs
+3. **Recent history** ... daily logs, journals, what happened in the last 48 hours
+4. **Memory** ... searchable long-term memory from every past conversation
+5. **Tools** ... what's installed, what's available, how to use it
+
+Your AI walks into every conversation already briefed.
+
+## Why It Matters
+
+Without Recall, every AI session starts cold. You repeat yourself. You re-explain context. You lose threads between conversations.
+
+With Recall, your AI remembers. Not just facts, but the arc of what you're building, what decisions were made, and why.
+
+## Boot Sequence
+
+Recall is implemented as a SessionStart hook. When Claude Code opens a session, the boot hook loads context files in order:
+
+```
+1. CLAUDE.md                    Identity + structure (harness config)
+2. SHARED-CONTEXT.md            Current state (under 50 lines)
+3. Most recent journal           Narrative from last session
+4. Daily logs (today + yesterday) Recency
+5. Full history (cold start)     Dream Weaver narrative
+6. CONTEXT.md                    Agent's own state
+7. SOUL.md                       Who this agent is
+8. Agent journals                Check for newer entries
+9. Agent daily logs              Check for newer entries
+```
+
+## Harness Differences
+
+**Claude Code CLI:** Full boot sequence. Identity, context, journals, daily logs all loaded via SessionStart hook.
+
+**OpenClaw:** Has its own boot sequence (workspace files). Recall provides backup context loading if the harness boot fails or is incomplete.
+
+## Session Registration
+
+On boot, Recall also registers the session in the Agent Register (`~/.ldm/sessions/`). This enables other sessions to discover this one via `ldm sessions`. See [Bridge](/ldm-os/features/bridge) for more on session discovery.
+
+## Connection to Total Recall
+
+Recall loads context at session start. Total Recall fills the memory that Recall serves. Total Recall imports historical conversations, generates multi-cadence summaries (daily/weekly/monthly/quarterly), and writes everything to Memory Crystal. On the next session start, Recall picks up the new data automatically.
+
+Without Total Recall, Recall only has what was captured going forward. With Total Recall, Recall has the complete history.
+
+## Technical Details
+
+The boot hook reads `boot-config.json` to determine which files to load. Each entry specifies a path pattern and priority. Files are read in priority order and concatenated into the session context.
+
+The hook runs with a 15-second timeout. If any file is missing, it's skipped silently. The boot sequence is additive. It never modifies files, only reads them.
+
+## Part of LDM OS
+
+Recall is included with LDM OS. It activates automatically after `ldm init`.

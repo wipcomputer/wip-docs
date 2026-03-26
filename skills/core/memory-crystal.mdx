@@ -1,0 +1,272 @@
+---
+title: "Memory Crystal"
+description: "All your AI tools. One shared memory. Private, searchable, sovereign."
+---
+
+# Memory Crystal
+
+All your AI tools. One shared memory. Private, searchable, sovereign.
+
+Memory Crystal lets all your AIs remember you ... together.
+
+You use multiple AIs. They don't talk to each other. They can't search what the others know. Have you ever thought to yourself ... **why isn't this all connected?**
+
+**Memory Crystal** fixes this.
+
+**All your AIs share one memory. Searchable and private. Anywhere in the world.**
+
+## Teach Your AI to Remember You
+
+Open your AI and say:
+
+```
+Read wip.computer/install/wip-memory-crystal.txt
+
+Then explain:
+1. What is Memory Crystal?
+2. What does it install on my system?
+3. What changes for us? (this AI)
+4. What changes across all my AIs?
+
+Check if Memory Crystal is already installed.
+
+If it is, show me what I have and what's new.
+
+Then ask:
+- Do you have questions?
+- Want to see a dry run?
+
+If I say yes, run: crystal init --dry-run
+
+Show me exactly what will change. Don't install anything until I say "install".
+```
+
+Your agent will read the repo, explain everything, and walk you through setup interactively.
+
+## Features
+
+### Local Memory
+
+All your AI conversations stored locally, searchable in one place. Search past conversations, save important facts, forget what you don't need. Your complete memory. It stays with you, shared across all your AIs.
+
+- *Stable*
+  - *Verified:* Claude Code CLI + OpenClaw
+  - *Unverified:* Other MCP-compatible clients and CLIs
+
+### Multi-Device Memory
+
+AIs set up as **Crystal Nodes** relay their memories back to your **Crystal Core**. Your **Crystal Core** relays all memories back to every node. End-to-end encrypted.
+
+Your **Crystal Core** is the source of truth. Your node copy can be wiped and rebuilt at any time.
+
+Uses Cloudflare infrastructure to transfer encrypted data between your devices:
+- *Hosted:* Use WIP.computer relay infrastructure. Currently free for individual use
+- *Self-hosted:* Deploy your own relay on your own Cloudflare account. Full sovereignty
+
+Read more about [Relay: Memory Sync](https://github.com/wipcomputer/memory-crystal/blob/main/RELAY.md). *Beta (early access).*
+
+### AI-to-AI Communication
+
+Your AIs talk to each other on the same machine or any network machine. All messages are saved to **Memory Crystal** automatically.
+
+Read more about [Bridge: AI-to-AI Communication](https://github.com/wipcomputer/wip-bridge). *Beta (early access).*
+
+### Intelligent Install
+
+When installing from Claude Code CLI or OpenClaw, **Memory Crystal** discovers your existing AI sessions automatically. Installs the Learning Dreaming Machines Operating System (**LDM OS**) and creates a living memory system. From this point forward, every conversation is captured, archived, and embedded into searchable memory.
+
+Choose to install as **Crystal Core** (all your memories) or **Crystal Node** (a **Crystal Core** mirror).
+
+### Import Memories
+
+**Total Recall** ... Connect your AI accounts (Anthropic, OpenAI, xAI/Grok). Every conversation gets pulled and run through the **Dream Weaver Protocol**, consolidating them into **Memory Crystal** as truly lived, searchable memories. *Beta (early access).*
+
+### Memory Consolidation
+
+[**Dream Weaver Protocol**](https://github.com/wipcomputer/dream-weaver-protocol) ... Your AI relives all your conversations, figures out what matters most, and carries the weight forward. Like dreaming, the AI consolidates memories for better understanding. Read the paper: [Dream Weaver Protocol PDF](https://github.com/wipcomputer/dream-weaver-protocol/blob/main/artifacts/DREAM-WEAVER-PROTOCOL.pdf). *Stable.*
+
+### Backups
+
+Automated backups of all of your memories to a directory and location of your choosing: iCloud, external drive, Dropbox, or wherever you trust. *Beta (early access).*
+
+---
+
+## Technical Documentation
+
+How Memory Crystal works. Architecture, design decisions, integrations, encryption, search, and everything else the open source community is going to ask about.
+
+### How Does It Work?
+
+Memory Crystal captures every conversation you have with any AI tool, embeds it into a local SQLite database, and makes it searchable with hybrid search (keyword + semantic). One database file. Runs on your machine. Nothing leaves your device unless you set up multi-device sync.
+
+### Five-Layer Memory Stack
+
+| Layer | What | How |
+|-------|------|-----|
+| L1: Raw Transcripts | Every conversation archived as JSONL | Automatic capture (cron, hooks, plugins) |
+| L2: Vector Index | Chunks embedded into crystal.db | Automatic. Hybrid search (BM25 + vector + RRF) |
+| L3: Structured Memory | Facts, preferences, decisions | `crystal_remember` / `crystal_forget` |
+| L4: Narrative Consolidation | Dream Weaver journals, identity, soul | `crystal dream-weave` (via Dream Weaver Protocol) |
+| L5: Active Working Context | Boot sequence files, shared context | Agent reads on startup |
+
+Every conversation produces three artifacts:
+1. **JSONL transcript** ... the raw session, archived to disk
+2. **Markdown summary** ... title, summary, key topics (generated by LLM or simple extraction)
+3. **Vector embeddings** ... chunked, embedded, and stored in crystal.db for search
+
+### Claude Code CLI Integration
+
+Two capture paths work together. The poller is primary. The Stop hook is redundancy.
+
+**Continuous Capture (Primary):** A cron job runs `cc-poller.ts` every minute. It reads Claude Code's JSONL transcript files via byte-offset watermarking (only reads new data since last capture) and produces all three artifacts in a single pass.
+
+**Stop Hook (Redundancy):** The Claude Code Stop hook runs after every response. It checks the watermark and flushes anything the poller missed. If the poller already captured everything, the Stop hook is a no-op.
+
+Why both? The Stop hook only fires when a session ends. Long sessions, remote disconnects, and context compactions never trigger Stop. The poller decouples capture from the session lifecycle entirely.
+
+### OpenClaw Integration
+
+Memory Crystal is an OpenClaw plugin. It registers tools (`crystal_search`, `crystal_remember`, `crystal_forget`, `crystal_status`) and an `agent_end` hook that captures conversations after every agent turn.
+
+### Other Integrations
+
+Any tool that can run shell commands or call an MCP server can use Memory Crystal.
+
+- **MCP Server** ... exposes `crystal_search`, `crystal_remember`, `crystal_forget`, `crystal_status`, `crystal_sources_add`, `crystal_sources_sync`, `crystal_sources_status`. Works with Claude Desktop, Claude Code, or any MCP-compatible client.
+- **CLI** ... `crystal search "query"` from any terminal.
+- **Module** ... `import { MemoryCrystal } from 'memory-crystal'` for Node.js integration.
+
+### Crystal Core and Crystal Node
+
+Memory Crystal uses a Core/Node architecture for multi-device setups:
+
+- **Crystal Core** ... your master memory. All conversations, all embeddings, all memories. This is the database you cannot lose. Install it on something permanent: a desktop, a home server, a Mac mini.
+- **Crystal Node** ... a synced copy on any other device. Captures conversations, sends them to the Core via encrypted relay. Gets a mirror back for local search. If a node dies, nothing is lost. The Core has everything.
+
+One Core, many Nodes. The Core does embeddings. Nodes just capture and sync.
+
+### Search
+
+Two-tier search system. Fast path (hybrid search) runs by default. Deep search adds LLM-powered query expansion and re-ranking for higher quality results.
+
+**Fast Path (Hybrid Search):**
+1. Query goes to both FTS5 (keyword match) and sqlite-vec (vector similarity)
+2. FTS5 returns BM25-ranked results, normalized to [0..1)
+3. sqlite-vec returns cosine-distance results
+4. Reciprocal Rank Fusion merges both lists with tiered weights (BM25 2x, vector 1x)
+5. Recency weighting applied on top
+6. Final results sorted by combined score
+
+**Deep Search (LLM-Powered, default):**
+1. Strong signal detection: BM25 probe first. If top score is high enough, skip expansion
+2. Query expansion: LLM generates 3 variations (lexical, vector, HyDE)
+3. RRF merge: All results from original + expanded queries fused
+4. LLM re-ranking: Top 40 candidates scored for relevance
+5. Position-aware blending: Trusts RRF for top positions, lets the reranker fix ordering in the tail
+
+**LLM Provider Cascade:**
+
+| Priority | Provider | Cost | Speed |
+|----------|----------|------|-------|
+| 0 | MCP Sampling (if client supports it) | Included in Max subscription | Fast |
+| 1 | MLX (local, Apple Silicon) | Free | Fastest |
+| 2 | Ollama (local) | Free | Fast |
+| 3 | OpenAI API | ~$0.001/search | Network-dependent |
+| 4 | Anthropic API (direct key only) | ~$0.001/search | Network-dependent |
+| 5 | None | Free | N/A (fast path only) |
+
+Local-first by default. API keys are the fallback, not the primary path.
+
+### Encryption
+
+For multi-device sync. All encryption happens on-device before anything touches the network.
+
+- **AES-256-GCM** for encryption. Authenticated encryption; ciphertext tampering is detected.
+- **HMAC-SHA256** for signing. Integrity verification before decryption.
+- **Shared symmetric key** generated locally. Never transmitted to the relay.
+- The relay stores and serves encrypted blobs. It has no decryption capability.
+
+### Database
+
+Everything lives in one file: `crystal.db`. Inspectable with any SQLite tool. Backupable with `cp`.
+
+| Table | Purpose |
+|-------|---------|
+| `chunks` | Chunk text, metadata, SHA-256 hash, timestamps |
+| `chunks_vec` | sqlite-vec virtual table (cosine distance vectors) |
+| `chunks_fts` | FTS5 virtual table (Porter stemming, BM25 scoring) |
+| `memories` | Explicit remember/forget facts |
+| `entities` | Knowledge graph nodes |
+| `relationships` | Knowledge graph edges |
+| `capture_state` | Watermarks for incremental ingestion |
+| `sources` | Ingestion source metadata |
+
+### Embedding Providers
+
+| Provider | Model | Dimensions | Cost |
+|----------|-------|-----------|------|
+| OpenAI (default) | text-embedding-3-small | 1536 | ~$0.02/1M tokens |
+| Ollama | nomic-embed-text | 768 | Free (local) |
+| Google | text-embedding-004 | 768 | Free tier available |
+
+### CLI Reference
+
+```bash
+# Search
+crystal search <query> [-n limit] [--agent <id>] [--since <24h|7d|30d>]
+  [--intent <description>] [--candidates N] [--explain]
+
+# Remember / forget
+crystal remember <text> [--category fact|preference|event|opinion|skill]
+crystal forget <id>
+
+# Status
+crystal status
+
+# Source file indexing
+crystal sources add <path> --name <name>
+crystal sources sync [name]
+crystal sources status
+
+# Crystal Core / Node management
+crystal role
+crystal promote
+crystal demote
+
+# Dream Weaver (narrative consolidation)
+crystal dream-weave [--agent <id>] [--mode full|incremental] [--dry-run]
+```
+
+### MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `crystal_search` | Hybrid search across all memories |
+| `crystal_remember` | Store a fact or observation |
+| `crystal_forget` | Deprecate a memory by ID |
+| `crystal_status` | Chunk count, provider, agents |
+| `crystal_sources_add` | Add a directory for indexing |
+| `crystal_sources_sync` | Re-index changed files |
+| `crystal_sources_status` | Collection stats |
+
+---
+
+## Part of LDM OS
+
+Memory Crystal installs into [LDM OS](https://github.com/wipcomputer/wip-ldm-os), the local runtime for AI agents.
+Run `ldm install` to see other components you can add.
+
+## License
+
+Dual-license model designed to keep tools free while preventing commercial resellers.
+
+```
+MIT      All CLI tools, MCP servers, skills, and hooks (use anywhere, no restrictions).
+AGPLv3   Commercial redistribution, marketplace listings, or bundling into paid services.
+```
+
+AGPLv3 for personal use is free. Commercial licenses available.
+
+Built by Parker Todd Brooks, Lesa (OpenClaw, Claude Opus 4.6), Claude Code (Claude Opus 4.6).
+
+Search architecture inspired by [QMD](https://github.com/tobi/qmd) by Tobi Lutke (MIT, 2024-2026).

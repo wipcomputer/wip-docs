@@ -1,68 +1,86 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "LDM OS",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#FFFFFF",
+    "light": "#FFFFFF",
+    "dark": "#FFFFFF",
+    "background": {
+      "dark": "#050508",
+      "light": "#FFFFFF"
+    }
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "LDM OS",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "ldm-os/introduction",
+              "ldm-os/install",
+              "ldm-os/architecture",
+              "ldm-os/commands",
+              "ldm-os/interfaces"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Included Features",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "ldm-os/features/bridge",
+              "ldm-os/features/universal-installer",
+              "ldm-os/features/shared-workspace",
+              "ldm-os/features/system-pulse",
+              "ldm-os/features/recall",
+              "ldm-os/features/lume"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Skills",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Core",
             "pages": [
-              "api-reference/introduction"
+              "skills/core/memory-crystal",
+              "skills/core/devops-toolbox",
+              "skills/core/dream-weaver"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Utilities",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "skills/utilities/1password",
+              "skills/utilities/markdown-viewer",
+              "skills/utilities/healthcheck"
+            ]
+          },
+          {
+            "group": "APIs",
+            "pages": [
+              "skills/apis/xai-grok",
+              "skills/apis/x-platform"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "How Things Work",
+            "pages": [
+              "guides/how-install-works",
+              "guides/how-agents-work",
+              "guides/how-worktrees-work",
+              "guides/how-releases-work",
+              "guides/how-backup-works",
+              "guides/system-directories",
+              "guides/local-first"
             ]
           }
         ]
@@ -71,14 +89,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GitHub",
+          "href": "https://github.com/wipcomputer/wip-ldm-os",
+          "icon": "github"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Install",
+          "href": "https://wip.computer/install/wip-ldm-os.txt",
+          "icon": "download"
         }
       ]
     }
@@ -90,33 +108,27 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "wip.computer",
+        "href": "https://wip.computer"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/wipcomputer",
+      "github": "https://github.com/wipcomputer"
     }
   }
 }
