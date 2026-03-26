@@ -43,6 +43,27 @@
                 "group": "Get Started",
                 "pages": [
                   "ldm-os/introduction",
+                  "ldm-os/install",
+                  "ldm-os/architecture",
+                  "ldm-os/commands",
+                  "ldm-os/interfaces"
+                ]
+              },
+              {
+                "group": "Included Features",
+                "pages": [
+                  "ldm-os/features/bridge",
+                  "ldm-os/features/universal-installer",
+                  "ldm-os/features/shared-workspace",
+                  "ldm-os/features/system-pulse",
+                  "ldm-os/features/recall",
+                  "ldm-os/features/lume"
+                ]
+              },
+              {
+                "group": "Get Started",
+                "pages": [
+                  "ldm-os/introduction2",
                   "ldm-os-copied-1/install",
                   "ldm-os-copied-1/architecture",
                   "ldm-os-copied-1/commands",
@@ -116,29 +137,7 @@
         "groups": [
           {
             "group": "LDM OS",
-            "pages": [
-              {
-                "group": "Get Started",
-                "pages": [
-                  "ldm-os/introduction1",
-                  "ldm-os/install",
-                  "ldm-os/architecture",
-                  "ldm-os/commands",
-                  "ldm-os/interfaces"
-                ]
-              },
-              {
-                "group": "Included Features",
-                "pages": [
-                  "ldm-os/features/bridge",
-                  "ldm-os/features/universal-installer",
-                  "ldm-os/features/shared-workspace",
-                  "ldm-os/features/system-pulse",
-                  "ldm-os/features/recall",
-                  "ldm-os/features/lume"
-                ]
-              }
-            ]
+            "pages": []
           }
         ]
       },
